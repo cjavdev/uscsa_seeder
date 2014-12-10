@@ -22,7 +22,7 @@
 
 FactoryGirl.define do
   factory :officer do
-    
+    email { Faker::Internet.email }
+    password 'password'
   end
-
 end
