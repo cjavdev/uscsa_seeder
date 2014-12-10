@@ -4,22 +4,25 @@
 a season of snow sport contests.
 
 + Athlete(id, bib_number, discipline, uscsa_num, eligible, school_id,
-first_name, last_name, gender)
-+ Race(id, date, start_time, gender, race_type)
+  first_name, last_name, gender)
++ Participant(id, athlete_id, race_id, seed_num)
++ Race(id, event_id, date, start_time, gender, race_type)
 + Team(id, school_id, discipline, gender)
 + School(id, name, abbreviation)
-+ User(id, email, password_digest, session_token, invitation_token,
-invitation_expiration, officer, captain, school_id, verified)
++ User(id, email, password_digest, session_token, invitation_token, 
+  invitation_expiration, officer, captain, school_id, verified)
++ Event(id, date, name, abbreviation)
 
 # User Stories
 
 +  Officer can login
 +  Captain can login
-+  Office can manage all teams
-+  Office can manage all athletes
++  Officer can manage all teams
++  Officer can manage all athletes
 +  Captain can manage athletes from her team
 +  Officer can import race data
 +  Officer can import athlete data
++  Officer can invite up to three Captains per
 +  Captain can seed athletes to races
 +  When its race day
    + Captain sees read only roster
@@ -43,10 +46,10 @@ invitation_expiration, officer, captain, school_id, verified)
 +  Online seeding closes at 5 PM the day before the race.
 +  For timed events (GS, SL), use the seed order as your start list.
 +  For style events (SLP, HP, QP, JAM), use the seeds in the reverse
-order as your start list so the best athletes go last.
+  order as your start list so the best athletes go last.
 +  For BX events, use the seeding to generate the brackets.
 +  There is a penalty for anyone who doesn't go online and seed by 5 PM the
-day before a race.
+  day before a race.
 
 **NB**: (I would actually have a built-in process that has a simple
 toggle for Officers to turn  on or off the access for Captains.  Then at
@@ -60,3 +63,5 @@ team.  Then the 2nd seeds are all randomly sorted, then the 3rd seeds
 are randomly sorted and so on and so forth.  This would get exported as
 a .csv or .txt file.  Then this would be imported to the SplitSecond
 timing system at Mammoth Mountain in a format they can use.
+
+**NB**: Maybe we should allow Officers to invite unlimited captains per school because it looks like he said two captains per school and then two or three captains per school in the same email
