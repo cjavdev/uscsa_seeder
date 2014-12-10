@@ -8,6 +8,8 @@ first_name, last_name, gender)
 + Race(id, date, start_time, gender, race_type)
 + Team(id, school_id, discipline, gender)
 + School(id, name, abbreviation)
++ User(id, email, password_digest, session_token, invitation_token,
+invitation_expiration, officer, captain, school_id, verified)
 
 # User Stories
 
