@@ -9,6 +9,6 @@ RSpec.feature 'Officer can sign in' do
     fill_in 'Password', with: 'password'
     click_button 'Log in'
 
-    expect(page).to have_content("Welcome, jobs@apple.com")
+    expect(page).to have_content("Welcome, #{ user.email }")
   end
 end
