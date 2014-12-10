@@ -40,15 +40,14 @@ first_name, last_name, gender)
 +  For style events (SLP, HP, QP, JAM), use the seeds in the reverse
 order as your start list so the best athletes go last.
 +  For BX events, use the seeding to generate the brackets.
++  There is a penalty for anyone who doesn't go online and seed by 5 PM the
+day before a race.
 
 **NB**: (I would actually have a built-in process that has a simple
 toggle for Officers to turn  on or off the access for Captains.  Then at
 5 PM the day before,  you toggle off.  If someone wants to register,
 then they have to call you and you can toggle back on and have them do
 it, or you can seed for them automatically).
-
-There is a penalty for anyone who doesn't go online and seed by 5 PM the
-day before a race.
 
 When the seeding file is generated for each race, the process is to take
 all of the 1st seeds and randomly sort all of the first entires for each
