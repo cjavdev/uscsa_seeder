@@ -1,5 +1,8 @@
 # USCSA Seeder Database
 
+**Pitch**: This is a tool for managing a league of athletes through out
+a season of snow sport contests.
+
 + Athlete(id, bib_number, discipline, uscsa_num, eligible, school_id,
 first_name, last_name, gender)
 + Race(id, date, start_time, gender, race_type)
