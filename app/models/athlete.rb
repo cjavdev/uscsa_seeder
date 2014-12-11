@@ -14,6 +14,13 @@
 #
 
 class Athlete < ActiveRecord::Base
+  validates :team, :bib_number, :first_name, :last_name, :sex, presence: true
+
   enum sex: [:male, :female]
+
   belongs_to :team
+
+  def name
+    "#{ first_name } #{ last_name }"
+  end
 end

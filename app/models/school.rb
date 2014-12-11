@@ -10,4 +10,7 @@
 #
 
 class School < ActiveRecord::Base
+  validates :name, :abbreviation, presence: true
+
+  has_many :teams
 end
