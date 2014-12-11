@@ -15,6 +15,9 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime
 #  updated_at             :datetime
+#  officer                :boolean          default(FALSE)
+#  captain                :boolean          default(FALSE)
+#  admin                  :boolean          default(FALSE)
 #
 
 FactoryGirl.define do
