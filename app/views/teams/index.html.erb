@@ -6,7 +6,7 @@
     <li> <%= school.name %> </li>
 		<ul>
 			<% school.teams.each do |team| %>
-				<li> <%= link_to team.discipline, team %> </li>
+				<li> <%= link_to team.discipline.split("_").map(&:capitalize).join(" "), team %> </li>
 			<% end %>
 		</ul>
   <% end %>

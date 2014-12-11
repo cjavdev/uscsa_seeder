@@ -4,4 +4,8 @@ class TeamsController < ApplicationController
   def index
     @schools = School.all
   end
+  
+  def show
+    @team = Team.find(params[:id])
+  end
 end
