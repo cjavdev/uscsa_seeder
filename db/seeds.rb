@@ -1,4 +1,9 @@
 puts "Building users..."
+madison = User.where(
+  email: "madison@sccsc.com",
+  admin: true
+).first_or_create!(password: "madisonmadison")
+
 danny = User.where(
   email: "burtdaniel@gmail.com",
   admin: true
