@@ -18,4 +18,9 @@ class Team < ActiveRecord::Base
 
   belongs_to :school
   has_many :athletes
+  has_many :users, through: :athletes
+
+  def captains
+    users.where(captain: true)
+  end
 end

@@ -27,4 +27,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :athlete
+  has_one :team, through: :athlete
 end
