@@ -1,2 +1,42 @@
-<h1>Schools#index</h1>
-<p>Find me in app/views/schools/index.html.erb</p>
+<div class="col-md-8">
+  <h1>Schools</h1>
+
+  <table class='table table-hover'>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Abbr.</th>
+				<th>Name</th>
+			</tr>
+		</thead>
+		<tbody>
+		  <% @schools.each do |school| %>
+        <tr>
+          <td> <%= school.id %> </td>
+          <td> <%= link_to school.abbreviation, school %> </td>
+          <td> <%= link_to school.name, school %> </td>
+        </tr>
+		  <% end %>
+		</tbody>
+  </table>
+
+  <% if current_user.admin %>
+  <div class="well">
+    <h3> New School </h3>
+
+    <form action="<%= schools_path %>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <div class="form-group">
+        <input type="text" name="school[abbreviation]" placeholder="Abbreviation">
+      </div>
+      <div class="form-group">
+        <input type="text" name="school[name]" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary">
+      </div>
+    </form>
+  </div>
+  <% end %>
+
+</div>

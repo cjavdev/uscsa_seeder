@@ -6,66 +6,39 @@
 			<tr>
 				<th>#</th>
 				<th>Name</th>
-				<th>Eligable</th>
-				<th>Bib Number</th>
-				<th>School</th>
-				<th>Team</th>
+        <th>&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
-		  <% @schools.each do |school| %>
+		  <% @meets.each do |meet| %>
+        <tr>
+          <td> <%= meet.id %> </td>
+          <td> <%= link_to meet.name, meet %> </td>
+          <td>
+            <%= button_to "Delete",
+              meet,
+              method: :delete,
+              class: "btn btn-xs btn-danger",
+              data: { confirm: "Are you sure you want to delete this meet?" } %>
+          </td>
+        </tr>
 		  <% end %>
 		</tbody>
   </table>
 
+  <% if current_user.admin %>
   <div class="well">
-    <h3> New Athlete </h3>
-    <form action="<%= athletes_path %>" method="post">
+    <h3> New Meet </h3>
+
+    <form action="<%= meets_path %>" method="post">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
       <div class="form-group">
-        <input type="text" name="athlete[first_name]" placeholder="First Name">
-      </div>
-      <div class="form-group">
-        <input type="text" name="athlete[last_name]" placeholder="Last Name">
-      </div>
-      <% if current_user.admin %>
-      <div class="form-group">
-        <select name="athlete[team_id]">
-          <% School.all.each do |school| %>
-            <% school.teams.each do |team| %>
-              <option value="team.id">
-                <%= school.abbreviation %>
-                <%= team.discipline %>
-                <%= team.sex %>
-              </option>
-            <% end %>
-          <% end %>
-        </select>
-      </div>
-      <% end %>
-      <div class="form-group">
-        <input type="text" name="athlete[bib_number]" placeholder="Bib Number">
-      </div>
-      <div class="form-group">
-        <label>
-          <input type='checkbox' checked>
-          Eligible
-        </label>
-      </div>
-      <div class="form-group">
-        <label>
-          <input type="radio" name="athlete[sex]" value="male" checked>
-          Male
-        </label>
-        <label>
-          <input type="radio" name="athlete[sex]" value="female">
-          Female
-        </label>
+        <input type="text" name="meet[name]" placeholder="Name">
       </div>
       <div class="form-group">
         <input type="submit" value="Submit" class="btn btn-primary">
       </div>
     </form>
   </div>
-
+  <% end %>
 </div>

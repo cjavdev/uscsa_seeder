@@ -12,5 +12,10 @@
 #
 
 class Event < ActiveRecord::Base
+  validates :meet, :start_at, :sex, :discipline, presence: true
+
+  enum sex: [:male, :female]
+  enum discipline: [:free_style_ski, :alpine_ski, :snowboard]
+
   belongs_to :meet
 end
