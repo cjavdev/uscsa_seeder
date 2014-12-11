@@ -19,6 +19,11 @@ class Athlete < ActiveRecord::Base
   enum sex: [:male, :female]
 
   belongs_to :team
+  has_one :user
+
+  def captain?
+    !!user
+  end
 
   def name
     "#{ first_name } #{ last_name }"
