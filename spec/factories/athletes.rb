@@ -15,12 +15,10 @@
 
 FactoryGirl.define do
   factory :athlete do
-    team nil
-bib_number "MyString"
-eligible false
-first_name "MyString"
-last_name "MyString"
-sex 1
+    bib_number "123ABC"
+    eligible false
+    first_name "first"
+    last_name "last"
+    sex 1
   end
-
 end

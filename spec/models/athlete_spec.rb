@@ -16,5 +16,16 @@
 require 'rails_helper'
 
 RSpec.describe Athlete, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#sex' do
+    it 'is valid as 0' do
+      athlete = FactoryGirl.create(:athlete, sex: 0)
+      expect(athlete).to be_valid
+    end
+
+    it 'only allows for 2 sex' do
+      expect {
+        FactoryGirl.build(:athlete, sex: 3)
+      }.to raise_exception
+    end
+  end
 end
