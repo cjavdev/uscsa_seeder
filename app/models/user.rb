@@ -18,6 +18,7 @@
 #  officer                :boolean          default(FALSE)
 #  captain                :boolean          default(FALSE)
 #  admin                  :boolean          default(FALSE)
+#  athlete_id             :integer
 #
 
 class User < ActiveRecord::Base
