@@ -1,9 +1,15 @@
-puts "Building user..."
+puts "Building users..."
 danny = User.where(
   email: "burtdaniel@gmail.com",
-  password: "dannydanny"
+  password: "dannydanny",
+  admin: true
 ).first_or_create!
 
+cj = User.where(
+  email: "cjavilla@gmail.com",
+  password: "password",
+  captain: true
+).first_or_create!
 
 puts "Building school..."
 a_school = School.where(
@@ -28,3 +34,5 @@ if Athlete.count < 10
     )
   end
 end
+
+cj.athlete_id = Athlete.last.id

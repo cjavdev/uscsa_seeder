@@ -14,4 +14,9 @@ class School < ActiveRecord::Base
 
   has_many :teams
   has_many :athletes, through: :teams
+
+  def captains
+    # TODO: improve?
+    athletes.to_a.select(&:captain?)
+  end
 end
