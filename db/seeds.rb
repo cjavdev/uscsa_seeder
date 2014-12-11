@@ -39,3 +39,4 @@ if Athlete.count < 10
 end
 
 cj.athlete_id = Athlete.last.id
+cj.save!

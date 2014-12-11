@@ -3,6 +3,7 @@
 <ul>
   <% @schools.each do |school| %>
     <li>
+      <%= school.name %>
       <ul>
       <% school.captains.each do |captain| %>
         <li><%= link_to captain.name, captain %><li>
