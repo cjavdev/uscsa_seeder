@@ -5,13 +5,13 @@
         <%= image_tag gravatar_url(current_user.email), class: 'img-circle' %>
       <% end %>
     </span>
-    <a href="<%= meets_url %>" class="list-group-item">
+    <a href="<%= meets_path %>" class="list-group-item">
       <i class="fa fa-calendar"></i> Meets
     </a>
-    <a href="<%= athletes_url %>" class="list-group-item">
+    <a href="<%= athletes_path %>" class="list-group-item">
       <i class="fa fa-users"></i> Athletes <span class="badge">14</span>
     </a>
-    <a href="#" class="list-group-item">
+    <a href="<%= captains_path %>" class="list-group-item">
       <i class="fa fa-users"></i> Captains <span class="badge">2</span>
     </a>
     <a href="#" class="list-group-item">

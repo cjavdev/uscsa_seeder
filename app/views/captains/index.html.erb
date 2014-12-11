@@ -1,0 +1,13 @@
+<h1>Captains</h1>
+
+<ul>
+  <% @schools.each do |school| %>
+    <li>
+      <ul>
+      <% school.captains.each do |captain| %>
+        <li><%= link_to captain.name, captain %><li>
+      <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
