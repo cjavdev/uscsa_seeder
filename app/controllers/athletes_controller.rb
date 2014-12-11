@@ -3,6 +3,7 @@ class AthletesController < ApplicationController
   before_filter :set_athletes
 
   def index
+    @schools = School.all
   end
 
   def show

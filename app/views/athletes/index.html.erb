@@ -1,9 +1,30 @@
 <div class="col-md-8">
   <h1>Athletes</h1>
 
-  <ul>
-  <% @athletes.each do |athlete| %>
-    <li><%= link_to athlete.name, athlete %></li>
-  <% end %>
-  </ul>
+  <table class='table table-hover'>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>School</th>
+				<th>Team</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% i = 0 %>
+		  <% @schools.each do |school| %>
+				<% school.teams.each do |team| %>
+					<% team.athletes.each do |athlete| %>
+						<tr>
+							<td><%= i %></td>
+							<% i += 1 %>
+				    	<td><%= link_to athlete.name, athlete_path(athlete) %></td>
+							<td><%= school.abbreviation %> </td>
+							<td><%= team.discipline.split("_").map(&:capitalize).join(" ") %></td>
+						</tr>
+				  <% end %>
+				<% end %>
+			<% end %>
+		</tbody>
+  </table>
 </div>
