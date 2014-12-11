@@ -1,15 +1,13 @@
 puts "Building users..."
 danny = User.where(
   email: "burtdaniel@gmail.com",
-  password: "dannydanny",
   admin: true
-).first_or_create!
+).first_or_create!(password: 'password')
 
 cj = User.where(
   email: "cjavilla@gmail.com",
-  password: "password",
   captain: true
-).first_or_create!
+).first_or_create!(password: 'password')
 
 puts "Building school..."
 a_school = School.where(
