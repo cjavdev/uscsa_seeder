@@ -6,6 +6,8 @@
 			<tr>
 				<th>#</th>
 				<th>Name</th>
+				<th>Eligable</th>
+				<th>Bib Number</th>
 				<th>School</th>
 				<th>Team</th>
 			</tr>
@@ -19,6 +21,8 @@
 							<td><%= i %></td>
 							<% i += 1 %>
 				    	<td><%= link_to athlete.name, athlete_path(athlete) %></td>
+							<td><input type='checkbox' <% if athlete.eligible %> checked <% end %>></td>
+							<td><%= athlete.bib_number %></td>
 							<td><%= school.abbreviation %> </td>
 							<td><%= team.discipline.split("_").map(&:capitalize).join(" ") %></td>
 						</tr>
