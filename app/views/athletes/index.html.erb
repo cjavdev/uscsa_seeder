@@ -42,6 +42,21 @@
       <div class="form-group">
         <input type="text" name="athlete[last_name]" placeholder="Last Name">
       </div>
+      <% if current_user.admin %>
+      <div class="form-group">
+        <select name="athlete[team_id]">
+          <% School.all.each do |school| %>
+            <% school.teams.each do |team| %>
+              <option value="team.id">
+                <%= school.abbreviation %>
+                <%= team.discipline %>
+                <%= team.sex %>
+              </option>
+            <% end %>
+          <% end %>
+        </select>
+      </div>
+      <% end %>
       <div class="form-group">
         <input type="text" name="athlete[bib_number]" placeholder="Bib Number">
       </div>

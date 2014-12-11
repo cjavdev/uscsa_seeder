@@ -3,6 +3,7 @@ class AthletesController < ApplicationController
   before_filter :set_athletes
 
   def index
+    # TODO: limit this for captains
     @schools = School.all
   end
 
