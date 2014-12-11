@@ -13,8 +13,10 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap-sprockets";
-@import "bootstrap";
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 body {
 	background-color: #2b3e50;
 }
@@ -30,15 +32,13 @@ body {
 .center {
 	text-align: center;
 }
-
 // Sidebar
 .sidebar-nav {
-    display: block;
-    float: left;
-    width: 150px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    // display: block;
+    // float: left;
+    // list-style: none;
+    // margin: 0;
+    // padding: 0;
 		background: black;
 		li {
 		  line-height: 40px;

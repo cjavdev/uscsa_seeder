@@ -1,0 +1,30 @@
+<div class="col-sm-4 col-md-3 sidebar-wrapper">
+  <div class="list-group sidebar-nav">
+    <span href="#" class="avatar list-group-item active">
+      <% if user_signed_in? %>
+        <%= image_tag gravatar_url(current_user.email), class: 'img-circle' %>
+      <% end %>
+    </span>
+    <a href="<%= meets_url %>" class="list-group-item">
+      <i class="fa fa-calendar"></i> Meets
+    </a>
+    <a href="<%= athletes_url %>" class="list-group-item">
+      <i class="fa fa-users"></i> Athletes <span class="badge">14</span>
+    </a>
+    <a href="#" class="list-group-item">
+      <i class="fa fa-users"></i> Captains <span class="badge">2</span>
+    </a>
+    <a href="#" class="list-group-item">
+      <i class="fa fa-university"></i> Schools
+    </a>
+    <a href="#" class="list-group-item">
+      <i class="fa fa-users"></i> Teams
+    </a>
+    <a href="#" class="list-group-item">
+      <i class="fa fa-legal"></i> Officers
+    </a>
+    <a href="#" class="list-group-item">
+      <i class="fa fa-folder-open-o"></i> Reports
+    </a>
+  </div>
+</div>
