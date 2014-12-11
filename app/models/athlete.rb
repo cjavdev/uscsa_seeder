@@ -15,9 +15,8 @@
 
 class Athlete < ActiveRecord::Base
   validates :team, :bib_number, :first_name, :last_name, :sex, presence: true
-
+  default_scope { order(:last_name, :first_name) }
   enum sex: [:male, :female]
-
   belongs_to :team
   has_one :user
 

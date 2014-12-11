@@ -3,5 +3,6 @@ class CaptainsController < ApplicationController
 
   def index
     @schools = School.all
+    @athletes = Athlete.all
   end
 end
