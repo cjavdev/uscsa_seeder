@@ -1,7 +1,9 @@
-<h1>Athletes</h1>
+<div class="col-md-8">
+  <h1>Athletes</h1>
 
-<ul>
-<% @athletes.each do |athlete| %>
-  <li><%= link_to athlete.name, athlete %></li>
-<% end %>
-</ul>
+  <ul>
+  <% @athletes.each do |athlete| %>
+    <li><%= link_to athlete.name, athlete %></li>
+  <% end %>
+  </ul>
+</div>

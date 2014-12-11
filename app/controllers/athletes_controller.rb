@@ -3,7 +3,6 @@ class AthletesController < ApplicationController
   before_filter :set_athletes
 
   def index
-    @athletes = Athlete.all
   end
 
   def show
@@ -13,8 +12,10 @@ class AthletesController < ApplicationController
   private
 
   def set_athletes
-    if current_user.captain
+    if current_user.admin
+      @athletes = Athlete.all
+    else
+      @athletes = current_user.team.athletes
     end
   end
-
 end
