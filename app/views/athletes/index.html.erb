@@ -32,11 +32,38 @@
 		</tbody>
   </table>
 
-  <form action="<%= athletes_path %>" method="post">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <div class="form-group">
-      <input type="text" name="athlete[first_name]" placeholder="First Name">
-    </div>
-    <input type="submit" value="Submit">
-  </form>
+  <div class="well">
+    <h3> New Athlete </h3>
+    <form action="<%= athletes_path %>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <div class="form-group">
+        <input type="text" name="athlete[first_name]" placeholder="First Name">
+      </div>
+      <div class="form-group">
+        <input type="text" name="athlete[last_name]" placeholder="Last Name">
+      </div>
+      <div class="form-group">
+        <input type="text" name="athlete[bib_number]" placeholder="Bib Number">
+      </div>
+      <div class="form-group">
+        <label>
+          <input type='checkbox' checked>
+          Eligible
+        </label>
+      </div>
+      <div class="form-group">
+        <label>
+          <input type="radio" name="athlete[sex]" value="male" checked>
+          Male
+        </label>
+        <label>
+          <input type="radio" name="athlete[sex]" value="female">
+          Female
+        </label>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary">
+      </div>
+    </form>
+  </div>
 </div>

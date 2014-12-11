@@ -10,6 +10,16 @@ class AthletesController < ApplicationController
     @athlete = Athlete.find(params[:id])
   end
 
+  def create
+    @athlete = @athletes.new(athlete_params)
+    if @athlete.save
+      redirect_to @athlete
+    else
+      flash[:errors] = @athlete.errors.full_messages
+      render :index
+    end
+  end
+
   private
 
   def set_athletes
@@ -17,6 +27,14 @@ class AthletesController < ApplicationController
       @athletes = Athlete.all
     else
       @athletes = current_user.team.athletes
+    end
+  end
+
+  def athlete_params
+    if current_user.admin
+      params.require(:athlete).permit(:first_name, :last_name, :bib_number, :sex, :discipline, :team_id)
+    else
+      params.require(:athlete).permit(:first_name, :last_name, :bib_number, :sex, :discipline)
     end
   end
 end
