@@ -1,4 +1,6 @@
 class AthletesController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     @athletes = Athlete.all
   end

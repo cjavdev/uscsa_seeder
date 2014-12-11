@@ -9,7 +9,10 @@
 <body>
 	<div class="container-fluid">
     <div class="row">
-      <%= render 'layouts/sidebar' %>
+      <% if user_signed_in? %>
+        <%= render 'layouts/sidebar' %>
+      <% end %>
+
       <%= yield %>
     </div>
   </div>
