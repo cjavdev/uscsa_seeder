@@ -1,10 +1,8 @@
 # == Schema Information
 #
-# Table name: officers
+# Table name: users
 #
 #  id                     :integer          not null, primary key
-#  created_at             :datetime
-#  updated_at             :datetime
 #  email                  :string(255)      default(""), not null
 #  encrypted_password     :string(255)      default(""), not null
 #  reset_password_token   :string(255)
@@ -15,14 +13,12 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
-#  confirmation_token     :string(255)
-#  confirmed_at           :datetime
-#  confirmation_sent_at   :datetime
+#  created_at             :datetime
+#  updated_at             :datetime
 #
 
-FactoryGirl.define do
-  factory :officer do
-    email { Faker::Internet.email }
-    password 'password'
-  end
+require 'rails_helper'
+
+RSpec.describe User, :type => :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

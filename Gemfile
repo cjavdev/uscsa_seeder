@@ -25,4 +25,3 @@ end
 
 gem 'devise'
 gem 'devise_invitable'
-gem 'high_voltage', '~> 2.2.1'
