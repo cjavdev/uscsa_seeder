@@ -1,0 +1,14 @@
+<div class="col-md-8">
+  <h1>Teams</h1>
+
+  <ul>
+  <% @schools.each do |school| %>
+    <li> <%= school.name %> </li>
+		<ul>
+			<% school.teams.each do |team| %>
+				<li> <%= link_to team.discipline, team %> </li>
+			<% end %>
+		</ul>
+  <% end %>
+  </ul>
+</div>
