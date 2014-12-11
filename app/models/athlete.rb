@@ -22,7 +22,7 @@ class Athlete < ActiveRecord::Base
   has_one :user
 
   def captain?
-    !!user.captain
+    !!user.try(:captain)
   end
 
   def name
