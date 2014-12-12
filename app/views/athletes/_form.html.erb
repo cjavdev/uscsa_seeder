@@ -14,7 +14,7 @@
   <% if current_user.admin %>
   <div class="form-group">
     <select name="athlete[team_id]" class="form-control">
-      <% School.all.each do |school| %>
+      <% School.includes(:teams).each do |school| %>
 				<% if athlete.persisted? && athlete.team.school != school %>
 					<% next %>
 				<% end %>
