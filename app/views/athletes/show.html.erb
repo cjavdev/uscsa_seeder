@@ -5,9 +5,9 @@
   <% if current_user.admin %>
     <%= link_to "All Captains", captains_path %>
   <% end %>
+
 	<div class='well'>
 		<h1>Edit Athlete</h1>
 		<%= render "athletes/form", athlete: @athlete %>
 	</div>
-	
 </div>

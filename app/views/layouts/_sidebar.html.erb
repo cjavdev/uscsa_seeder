@@ -2,6 +2,7 @@
   <div class="list-group sidebar-nav">
     <span href="#" class="avatar list-group-item active">
       <%= image_tag "sccsc_logo.jpg", class: 'logo' %>
+      <%= current_user.email %>
     </span>
     <a href="<%= meets_path %>" class="list-group-item">
       <i class="fa fa-calendar"></i> Meets
