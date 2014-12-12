@@ -33,9 +33,9 @@ class AthletesController < ApplicationController
 
   def athlete_params
     if current_user.admin
-      params.require(:athlete).permit(:first_name, :last_name, :bib_number, :sex, :discipline, :team_id)
+      params.require(:athlete).permit(:uscsa_number, :first_name, :last_name, :bib_number, :sex, :discipline, :team_id)
     else
-      params.require(:athlete).permit(:first_name, :last_name, :bib_number, :sex, :discipline)
+      params.require(:athlete).permit(:uscsa_number, :first_name, :last_name, :bib_number, :sex, :discipline)
     end
   end
 end
