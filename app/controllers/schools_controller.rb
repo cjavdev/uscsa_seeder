@@ -12,12 +12,17 @@ class SchoolsController < ApplicationController
   def create
     @school = School.new(school_params)
 
-    if @school.save
-      redirect_to @school
-    else
+    unless @school.save
       flash[:errors] = @school.errors.full_messages
-      render :index
     end
+
+    redirect_to schools_path
+  end
+
+  def destroy
+    @school = School.find(params[:id])
+    @school.try(:destroy)
+    redirect_to schools_path
   end
 
   private

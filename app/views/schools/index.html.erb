@@ -7,6 +7,7 @@
 				<th>#</th>
 				<th>Abbr.</th>
 				<th>Name</th>
+				<th>&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -15,28 +16,36 @@
           <td> <%= school.id %> </td>
           <td> <%= link_to school.abbreviation, school %> </td>
           <td> <%= link_to school.name, school %> </td>
+          <td>
+            <%= button_to 'Delete',
+              school,
+              method: :delete,
+              class: 'btn btn-xs btn-danger',
+              data: { confirm: 'Are you sure you want to delete this school?' } %>
+          </td>
         </tr>
 		  <% end %>
 		</tbody>
   </table>
 
   <% if current_user.admin %>
-  <div class="well">
-    <h3> New School </h3>
+    <div class="well">
+      <h3> New School </h3>
 
-    <form action="<%= schools_path %>" method="post">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <div class="form-group">
-        <input type="text" name="school[abbreviation]" placeholder="Abbreviation">
-      </div>
-      <div class="form-group">
-        <input type="text" name="school[name]" placeholder="Name">
-      </div>
-      <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-primary">
-      </div>
-    </form>
-  </div>
+      <%= render 'layouts/errors' %>
+
+      <form action="<%= schools_path %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <div class="form-group">
+          <input type="text" name="school[abbreviation]" placeholder="Abbreviation" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="text" name="school[name]" placeholder="Full Name" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
   <% end %>
-
 </div>
