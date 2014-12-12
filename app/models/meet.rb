@@ -11,5 +11,5 @@
 class Meet < ActiveRecord::Base
   validate :name, presence: true, uniqueness: true
 
-  has_many :events
+  has_many :events, counter_cache: true
 end
