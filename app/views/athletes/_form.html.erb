@@ -1,39 +1,65 @@
 <%= render 'layouts/errors' %>
 <% action_path = (athlete.persisted? ? athlete_path(athlete) : athletes_path) %>
+
 <form action="<%= action_path %>" method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
   <% if athlete.persisted? %>
     <input type="hidden" name="_method" value="PATCH">
   <% end %>
   <div class="form-group">
-    <input type="text" name="athlete[first_name]" placeholder="First Name" class="form-control" value='<%= athlete.first_name %>'>
+    <input
+      type="text"
+      name="athlete[first_name]"
+      placeholder="First Name"
+      class="form-control"
+      value='<%= athlete.first_name %>'>
   </div>
   <div class="form-group">
-    <input type="text" name="athlete[last_name]" placeholder="Last Name" class="form-control" value='<%= athlete.last_name %>'>
+    <input
+      type="text"
+      name="athlete[last_name]"
+      placeholder="Last Name"
+      class="form-control"
+      value='<%= athlete.last_name %>'>
   </div>
   <% if current_user.admin %>
-  <div class="form-group">
-    <select name="athlete[team_id]" class="form-control">
-      <% School.includes(:teams).each do |school| %>
-				<% if athlete.persisted? && athlete.team.school != school %>
-					<% next %>
-				<% end %>
-        <% school.teams.each do |team| %>
-          <option value="<%= team.id %>" <% if athlete.team == team %> selected <% end %>>
-            <%= school.abbreviation %>
-            <%= team.discipline.split("_").map(&:capitalize).join(" ") %>
-            <%= team.sex %>
-          </option>
+    <div class="form-group">
+      <select name="athlete[team_id]" class="form-control">
+        <% School.includes(:teams).each do |school| %>
+          <% if athlete.persisted? && athlete.team.school != school %>
+            <% next %>
+          <% end %>
+          <% school.teams.each do |team| %>
+            <option
+              <% if athlete.team == team %> selected <% end %>
+              value="<%= team.id %>">
+              <%= school.abbreviation %>
+              <%= team.discipline.split("_").map(&:capitalize).join(" ") %>
+              <%= team.sex %>
+            </option>
+          <% end %>
         <% end %>
-      <% end %>
-    </select>
-  </div>
+      </select>
+    </div>
   <% end %>
   <div class="form-group">
-    <input type="text" name="athlete[bib_number]" placeholder="Bib Number" class="form-control" value='<%= athlete.bib_number %>'>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Bib Number"
+      name="athlete[bib_number]"
+      value='<%= athlete.bib_number %>'>
   </div>
   <div class="form-group">
-    <input type="text" name="athlete[uscsa_number]" placeholder="USCSA #" class="form-control" value='<%= athlete.uscsa_number %>'>
+    <input
+      type="text"
+      name="athlete[uscsa_number]"
+      placeholder="USCSA #"
+      class="form-control"
+      value='<%= athlete.uscsa_number %>'>
   </div>
   <div class="checkbox">
     <label>
@@ -49,11 +75,19 @@
   </div>
   <div class="form-group">
     <label>
-      <input type="radio" name="athlete[sex]" value="male" <% if athlete.sex == "male" %>checked<% end %>>
+      <input
+        type="radio"
+        name="athlete[sex]"
+        <% if athlete.sex == "male" %>checked<% end %>
+        value="male">
       Male
     </label>
     <label>
-      <input type="radio" name="athlete[sex]" value="female" <% if athlete.sex == "female" %>checked<% end %>>
+      <input
+        type="radio"
+        name="athlete[sex]"
+        <% if athlete.sex == "female" %>checked<% end %>
+        value="female">
       Female
     </label>
   </div>

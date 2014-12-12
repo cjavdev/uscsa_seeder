@@ -5,16 +5,16 @@
       <%= current_user.email %>
     </span>
     <a href="<%= meets_path %>" class="list-group-item">
-      <i class="fa fa-calendar"></i> Meets
+      <i class="fa fa-calendar"></i> Meets <span class="badge"><%= Meet.count %></span>
     </a>
     <a href="<%= athletes_path %>" class="list-group-item">
-      <i class="fa fa-users"></i> Athletes <span class="badge">14</span>
+      <i class="fa fa-users"></i> Athletes <span class="badge"><%= current_user.athletes.count %></span>
     </a>
     <a href="<%= captains_path %>" class="list-group-item">
-      <i class="fa fa-users"></i> Captains <span class="badge">2</span>
+      <i class="fa fa-users"></i> Captains <span class="badge"><%= User.captains.count %></span>
     </a>
     <a href="<%= schools_path %>" class="list-group-item">
-      <i class="fa fa-university"></i> Schools
+      <i class="fa fa-university"></i> Schools <span class="badge"><%= School.count %></span>
     </a>
     <a href="#" class="list-group-item">
       <i class="fa fa-legal"></i> Officers

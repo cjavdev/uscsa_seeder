@@ -44,11 +44,7 @@ class AthletesController < ApplicationController
   end
 
   def set_athletes
-    if current_user.admin
-      @athletes = Athlete.all
-    else
-      @athletes = current_user.team.athletes
-    end
+    @athletes = current_user.athletes
   end
 
   def athlete_params
