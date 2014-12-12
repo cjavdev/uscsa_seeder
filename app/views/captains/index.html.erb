@@ -23,7 +23,7 @@
         <div class="form-group">
           <select name="user[athlete_id]" class="form-control">
             <% @athletes.each do |athlete| %>
-              <option value="<%= athlete.id %>"><%= athlete.name %></option>
+              <option value="<%= athlete.id %>"><%= athlete.name %> | <%= athlete.team.school.abbreviation %></option>
             <% end %>
           </select>
         </div>
