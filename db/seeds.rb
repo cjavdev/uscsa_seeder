@@ -48,13 +48,15 @@ puts "Building athletes..."
     sex: 0,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
+    uscsa_number: 73 + x,
   )
 
   b_team.athletes.create!(
     bib_number: 10 + x,
-    sex: 0,
+    sex: 1,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
+    uscsa_number: 217 + x,
   )
 end
 

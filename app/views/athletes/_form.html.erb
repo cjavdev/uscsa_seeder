@@ -1,0 +1,59 @@
+
+<form action="<%= athletes_path %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <div class="form-group">
+    <input type="text" name="athlete[first_name]" placeholder="First Name" class="form-control" value='<%= athlete.first_name %>'>
+  </div>
+  <div class="form-group">
+    <input type="text" name="athlete[last_name]" placeholder="Last Name" class="form-control" value='<%= athlete.last_name %>'>
+  </div>
+  <% if current_user.admin %>
+  <div class="form-group">
+    <select name="athlete[team_id]" class="form-control">
+      <% School.all.each do |school| %>
+				<% if athlete.persisted? && athlete.team.school != school %>
+					<% next %>
+				<% end %>
+        <% school.teams.each do |team| %>
+          <option value="team.id" <% if athlete.team == team %> selected <% end %>>
+            <%= school.abbreviation %>
+            <%= team.discipline.split("_").map(&:capitalize).join(" ") %>
+            <%= team.sex %>
+          </option>
+        <% end %>
+      <% end %>
+    </select>
+  </div>
+  <% end %>
+  <div class="form-group">
+    <input type="text" name="athlete[bib_number]" placeholder="Bib Number" class="form-control" value='<%= athlete.bib_number %>'>
+  </div>
+  <div class="form-group">
+    <input type="text" name="athlete[uscsa_number]" placeholder="USCSA #" class="form-control" value='<%= athlete.uscsa_number %>'>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type='checkbox' <% if athlete.eligible || athlete.nil? %> checked <% end %>>
+      Eligible
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type='checkbox' <% if athlete.captain? %> checked <% end %>>
+      Captain
+    </label>
+  </div>
+  <div class="form-group">
+    <label>
+      <input type="radio" name="athlete[sex]" value="male" <% if athlete.sex == "male" %>checked<% end %>>
+      Male
+    </label>
+    <label>
+      <input type="radio" name="athlete[sex]" value="female" <% if athlete.sex == "female" %>checked<% end %>>
+      Female
+    </label>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Submit" class="btn btn-primary">
+  </div>
+</form>

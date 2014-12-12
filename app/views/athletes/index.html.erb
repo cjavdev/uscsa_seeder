@@ -8,6 +8,7 @@
 				<th>Name</th>
 				<th>Eligable</th>
 				<th>Bib Number</th>
+				<th>USCSA Number</th>
 				<th>School</th>
 				<th>Team</th>
 			</tr>
@@ -23,6 +24,7 @@
 				    	<td><%= link_to athlete.name, athlete_path(athlete) %></td>
 							<td><input type='checkbox' <% if athlete.eligible %> checked <% end %>></td>
 							<td><%= athlete.bib_number %></td>
+							<td><%= athlete.uscsa_number %></td>
 							<td><%= school.abbreviation %> </td>
 							<td><%= team.discipline.split("_").map(&:capitalize).join(" ") %></td>
 						</tr>
@@ -31,57 +33,8 @@
 			<% end %>
 		</tbody>
   </table>
-
-  <div class="well">
-    <h3> New Athlete </h3>
-    <form action="<%= athletes_path %>" method="post">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <div class="form-group">
-        <input type="text" name="athlete[first_name]" placeholder="First Name" class="form-control">
-      </div>
-      <div class="form-group">
-        <input type="text" name="athlete[last_name]" placeholder="Last Name" class="form-control">
-      </div>
-      <% if current_user.admin %>
-      <div class="form-group">
-        <select name="athlete[team_id]" class="form-control">
-          <% School.all.each do |school| %>
-            <% school.teams.each do |team| %>
-              <option value="team.id">
-                <%= school.abbreviation %>
-                <%= team.discipline %>
-                <%= team.sex %>
-              </option>
-            <% end %>
-          <% end %>
-        </select>
-      </div>
-      <% end %>
-      <div class="form-group">
-        <input type="text" name="athlete[bib_number]" placeholder="Bib Number" class="form-control">
-      </div>
-      <div class="form-group">
-        <input type="text" name="athlete[uscsa_number]" placeholder="USCSA #" class="form-control">
-      </div>
-      <div class="checkbox">
-        <label>
-          <input type='checkbox' checked>
-          Eligible
-        </label>
-      </div>
-      <div class="form-group">
-        <label>
-          <input type="radio" name="athlete[sex]" value="male" checked>
-          Male
-        </label>
-        <label>
-          <input type="radio" name="athlete[sex]" value="female">
-          Female
-        </label>
-      </div>
-      <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-primary">
-      </div>
-    </form>
-  </div>
+	<div class="well">
+	  <h3> New Athlete </h3>
+		<%= render "athletes/form", athlete: Athlete.new %>
+	</div>
 </div>
