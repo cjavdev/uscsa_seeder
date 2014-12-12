@@ -2,4 +2,10 @@
   <h1><%= @school.name %></h1>
   <p><%= @school.abbreviation %></p>
   <%= link_to "All Schools", schools_path %>
+
+  <div class="well">
+    <h3> Update School </h3>
+    <%= render 'form', school: @school %>
+  </div>
 </div>
+
