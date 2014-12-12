@@ -1,0 +1,29 @@
+<% action_path = (school.persisted? ? school_path(school) : schools_path) %>
+
+<%= render 'layouts/errors' %>
+
+<form action="<%= action_path %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <% if school.persisted? %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+  <div class="form-group">
+    <input
+      type="text"
+      name="school[abbreviation]"
+      placeholder="Abbreviation"
+      value="<%= school.abbreviation %>"
+      class="form-control">
+  </div>
+  <div class="form-group">
+    <input
+      type="text"
+      name="school[name]"
+      placeholder="Full Name"
+      value="<%= school.name %>"
+      class="form-control">
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Submit" class="btn btn-primary">
+  </div>
+</form>

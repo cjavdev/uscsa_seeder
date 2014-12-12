@@ -3,6 +3,7 @@ class SchoolsController < ApplicationController
 
   def index
     @schools = School.all
+    @school = School.new
   end
 
   def show
@@ -13,11 +14,29 @@ class SchoolsController < ApplicationController
     @school = School.new(school_params)
 
     if @school.save
-      redirect_to @school
+      redirect_to schools_path
     else
-      flash[:errors] = @school.errors.full_messages
+      @schools = School.all
+      flash.now[:errors] = @school.errors.full_messages
       render :index
     end
+  end
+
+  def update
+    @school = School.find(params[:id])
+
+    if @school.update(school_params)
+      redirect_to @school
+    else
+      flash.now[:errors] = @school.errors.full_messages
+      render :show
+    end
+  end
+
+  def destroy
+    @school = School.find(params[:id])
+    @school.try(:destroy)
+    redirect_to schools_path
   end
 
   private
