@@ -1,6 +1,7 @@
 class AthletesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_athletes
+  before_filter :set_schools
 
   def index
     # TODO: limit this for captains
@@ -22,6 +23,14 @@ class AthletesController < ApplicationController
   end
 
   private
+
+  def set_schools
+    if current_user.admin
+      @schools = School.all
+    else
+      @schools = [current_user.team.school]
+    end
+  end
 
   def set_athletes
     if current_user.admin
