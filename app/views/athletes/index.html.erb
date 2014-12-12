@@ -37,14 +37,14 @@
     <form action="<%= athletes_path %>" method="post">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
       <div class="form-group">
-        <input type="text" name="athlete[first_name]" placeholder="First Name">
+        <input type="text" name="athlete[first_name]" placeholder="First Name" class="form-control">
       </div>
       <div class="form-group">
-        <input type="text" name="athlete[last_name]" placeholder="Last Name">
+        <input type="text" name="athlete[last_name]" placeholder="Last Name" class="form-control">
       </div>
       <% if current_user.admin %>
       <div class="form-group">
-        <select name="athlete[team_id]">
+        <select name="athlete[team_id]" class="form-control">
           <% School.all.each do |school| %>
             <% school.teams.each do |team| %>
               <option value="team.id">
@@ -58,9 +58,12 @@
       </div>
       <% end %>
       <div class="form-group">
-        <input type="text" name="athlete[bib_number]" placeholder="Bib Number">
+        <input type="text" name="athlete[bib_number]" placeholder="Bib Number" class="form-control">
       </div>
       <div class="form-group">
+        <input type="text" name="athlete[uscsa_num]" placeholder="USCSA #" class="form-control">
+      </div>
+      <div class="checkbox">
         <label>
           <input type='checkbox' checked>
           Eligible
