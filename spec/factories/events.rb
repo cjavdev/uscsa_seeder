@@ -9,11 +9,10 @@
 #  start_at   :datetime
 #  sex        :integer          default(0)
 #  discipline :integer          default(0)
+#  race_type  :integer          default(0)
 #
 
 FactoryGirl.define do
   factory :event do
-    
   end
-
 end

@@ -9,6 +9,7 @@
 #  start_at   :datetime
 #  sex        :integer          default(0)
 #  discipline :integer          default(0)
+#  race_type  :integer          default(0)
 #
 
 require 'rails_helper'
