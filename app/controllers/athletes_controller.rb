@@ -5,7 +5,7 @@ class AthletesController < ApplicationController
 
   def index
     # TODO: limit this for captains
-    @schools = School.all
+    @athlete = Athlete.new
   end
 
   def show
@@ -17,8 +17,19 @@ class AthletesController < ApplicationController
     if @athlete.save
       redirect_to @athlete
     else
-      flash[:errors] = @athlete.errors.full_messages
+      flash.now[:errors] = @athlete.errors.full_messages
       render :index
+    end
+  end
+
+  def update
+    @athlete = @athletes.find(params[:id])
+
+    if @athlete.update(athlete_params)
+      redirect_to @athlete
+    else
+      flash.now[:errors] = @athlete.errors.full_messages
+      render :show
     end
   end
 

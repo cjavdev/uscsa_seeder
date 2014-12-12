@@ -1,6 +1,10 @@
-
-<form action="<%= athletes_path %>" method="post">
+<%= render 'layouts/errors' %>
+<% action_path = (athlete.persisted? ? athlete_path(athlete) : athletes_path) %>
+<form action="<%= action_path %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <% if athlete.persisted? %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
   <div class="form-group">
     <input type="text" name="athlete[first_name]" placeholder="First Name" class="form-control" value='<%= athlete.first_name %>'>
   </div>
@@ -15,7 +19,7 @@
 					<% next %>
 				<% end %>
         <% school.teams.each do |team| %>
-          <option value="team.id" <% if athlete.team == team %> selected <% end %>>
+          <option value="<%= team.id %>" <% if athlete.team == team %> selected <% end %>>
             <%= school.abbreviation %>
             <%= team.discipline.split("_").map(&:capitalize).join(" ") %>
             <%= team.sex %>
