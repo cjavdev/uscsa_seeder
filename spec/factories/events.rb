@@ -14,5 +14,6 @@
 
 FactoryGirl.define do
   factory :event do
+    meet
   end
 end

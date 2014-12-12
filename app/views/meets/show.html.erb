@@ -8,6 +8,8 @@
 		<thead>
 			<tr>
 				<th>#</th>
+        <th>Start At</th>
+        <th>Seeding Closes At</th>
         <th>Type</th>
 				<th>Discipline</th>
         <th>Sex</th>
@@ -18,6 +20,8 @@
 		  <% @meet.events.each do |event| %>
         <tr>
           <td> <%= event.id %> </td>
+          <td> <%= event.start_at.strftime("%B %d at %I:%M %p %Z") %> </td>
+          <td> <%= event.seeding_closes_at.strftime("%B %d at %I:%M %p") %> </td>
           <td> <%= event.full_race_type %> </td>
           <td> <%= event.discipline %> </td>
           <td> <%= event.sex %> </td>
