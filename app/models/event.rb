@@ -33,4 +33,8 @@ class Event < ActiveRecord::Base
   def self.full_race_types
     race_types.keys.map { |t| FULL_RACE_TYPES[t.to_sym] }
   end
+
+  def full_race_type
+    FULL_RACE_TYPES[race_type.to_sym]
+  end
 end

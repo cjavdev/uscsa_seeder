@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :set_meet
+  before_filter :set_meet, except: [:destroy]
 
   def create
     @event = @meet.events.new(event_params)
@@ -8,6 +8,13 @@ class EventsController < ApplicationController
       flash[:errors] = @event.errors.full_messages
     end
     redirect_to @meet
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    meet = @event.meet
+    @event.try(:destroy)
+    redirect_to meet
   end
 
   private
