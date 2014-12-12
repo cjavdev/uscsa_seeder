@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root to: 'events#index'
-  devise_for :users
+  root to: 'meets#index'
+  devise_for :users, controllers: { invitations: 'captain_invitations' }
 
   resources :meets
   resources :teams
@@ -9,5 +9,4 @@ Rails.application.routes.draw do
   resources :schools
   resources :captains
   resources :officers
-  resources :captain_invitations
 end
