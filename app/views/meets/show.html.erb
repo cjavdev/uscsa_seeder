@@ -1,4 +1,65 @@
 <div class="col-md-8">
   <h1><%= @meet.name %></h1>
   <%= link_to "All Meets", meets_path %>
+
+  <h3> Events </h3>
+
+  <table class='table table-hover'>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Discipline</th>
+        <th>Sex</th>
+        <th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+		  <% @meet.events.each do |event| %>
+        <tr>
+          <td> <%= event.id %> </td>
+          <td> <%= event.discipline %> </td>
+          <td> <%= event.sex %> </td>
+          <td>
+            <%= button_to "Delete",
+              event,
+              method: :delete,
+              class: "btn btn-xs btn-danger",
+              data: { confirm: "Are you sure you want to delete this event?" } %>
+          </td>
+        </tr>
+		  <% end %>
+		</tbody>
+  </table>
+
+  <% if current_user.admin %>
+    <div class="well">
+      <h3> Add Event </h3>
+
+      <form action="<%= meet_events_path(@meet) %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <div class="form-group">
+          <input type="datetime-local" name="event[start_at]" placeholder="Start Date" class="form-control">
+        </div>
+        <div class="form-group">
+          <select name="event[discipline]" class="form-control">
+            <% Team.disciplines.each do |discipline| %>
+            <option value="<%= discipline[0] %>"><%= discipline[0] %></option>
+            <% end %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="radio" name="event[sex]" value="male" checked>Male
+          </label>
+          <label>
+            <input type="radio" name="event[sex]" value="female">Female
+          </label>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
+  <% end %>
+
 </div>
