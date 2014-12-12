@@ -15,27 +15,6 @@
 	</ul>
 
   <% if current_user.admin %>
-    <div class="well">
-      <h3>Invite Captain</h3>
-
-      <form action="<%= user_invitation_path %>" method="post">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-        <div class="form-group">
-          <select name="user[athlete_id]" class="form-control">
-            <% School.all.each do |school| %>
-              <optgroup label="<%= school.abbreviation %>">
-                <% school.athletes.each do |athlete| %>
-                  <option value="<%= athlete.id %>"><%= athlete.name %></option>
-                <% end %>
-              </optgroup>
-            <% end %>
-          </select>
-        </div>
-        <div class="form-group">
-          <input type="text" name="user[email]" placeholder="email" class="form-control">
-        </div>
-        <input type="submit" value="Invite" class="btn btn-primary">
-      </form>
-    </div>
+    <%= render "captains/form" %>
   <% end %>
 </div>
