@@ -37,18 +37,14 @@ class AthletesController < ApplicationController
 
   def set_schools
     if current_user.admin
-      @schools = School.all
+      @schools = School.includes(teams: :athletes)
     else
       @schools = [current_user.team.school]
     end
   end
 
   def set_athletes
-    if current_user.admin
-      @athletes = Athlete.all
-    else
-      @athletes = current_user.team.athletes
-    end
+    @athletes = current_user.athletes
   end
 
   def athlete_params

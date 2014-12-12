@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.7'
-gem 'thin'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
@@ -10,7 +9,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
-gem 'faker'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -18,6 +16,8 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'letter_opener'
+  gem 'lol_dba'
+  gem 'bullet'
 end
 
 group :test do
@@ -28,4 +28,7 @@ end
 
 gem 'devise'
 gem 'devise_invitable'
+gem 'faker'
 gem 'font-awesome-sass'
+gem 'newrelic_rpm'
+gem 'thin'

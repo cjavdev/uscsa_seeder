@@ -37,4 +37,16 @@ class User < ActiveRecord::Base
 
   belongs_to :athlete
   has_one :team, through: :athlete
+
+  def self.captains
+    where(captain: true)
+  end
+
+  def athletes
+    if admin
+      Athlete.all
+    else
+      team.athletes
+    end
+  end
 end
