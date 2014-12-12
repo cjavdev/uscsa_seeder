@@ -37,4 +37,8 @@ class Event < ActiveRecord::Base
   def full_race_type
     FULL_RACE_TYPES[race_type.to_sym]
   end
+
+  def seeding_closes_at
+    (start_at - 1.day).to_date.to_time + 17.hours
+  end
 end

@@ -15,5 +15,11 @@
 require 'rails_helper'
 
 RSpec.describe Event, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#seeding_closes_at' do
+    it 'returns the correct date time for close' do
+      event = FactoryGirl.create(:event, start_at: Time.new(2000, 01, 01, 13, 30, 0))
+
+      expect(event.seeding_closes_at).to eq(Time.new(1999, 12, 31, 17, 0, 0))
+    end
+  end
 end
