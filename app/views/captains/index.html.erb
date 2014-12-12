@@ -22,8 +22,12 @@
         <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
         <div class="form-group">
           <select name="user[athlete_id]" class="form-control">
-            <% @athletes.each do |athlete| %>
-              <option value="<%= athlete.id %>"><%= athlete.name %> | <%= athlete.team.school.abbreviation %></option>
+            <% School.all.each do |school| %>
+              <optgroup label="<%= school.abbreviation %>">
+                <% school.athletes.each do |athlete| %>
+                  <option value="<%= athlete.id %>"><%= athlete.name %></option>
+                <% end %>
+              </optgroup>
             <% end %>
           </select>
         </div>
