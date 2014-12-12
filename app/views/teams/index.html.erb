@@ -3,7 +3,7 @@
 
   <ul>
   <% @schools.each do |school| %>
-    <li> <%= school.name %> </li>
+    <li> <%= link_to school.name, school %> </li>
 		<ul>
 			<% school.teams.each do |team| %>
 				<li> <%= link_to team.discipline.split("_").map(&:capitalize).join(" "), team %> </li>

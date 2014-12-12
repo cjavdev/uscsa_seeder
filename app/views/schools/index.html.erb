@@ -7,6 +7,7 @@
 				<th>#</th>
 				<th>Abbr.</th>
 				<th>Name</th>
+				<th>Teams</th>
 				<th>&nbsp;</th>
 			</tr>
 		</thead>
@@ -16,6 +17,7 @@
           <td> <%= school.id %> </td>
           <td> <%= link_to school.abbreviation, school %> </td>
           <td> <%= link_to school.name, school %> </td>
+          <td> <%= school.teams_count %> </td>
           <td>
             <%= button_to 'Delete',
               school,

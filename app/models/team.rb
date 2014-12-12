@@ -20,6 +20,20 @@ class Team < ActiveRecord::Base
   has_many :athletes
   has_many :users, through: :athletes
 
+  FULL_DISCIPLINES = {
+    free_style_ski: 'Free Style Ski',
+    alpine_ski: 'Alpine Ski',
+    snowboard: 'Snowboard'
+  }
+
+  def self.full_disciplines
+    disciplines.keys.map { |d| FULL_DISCIPLINES[d.to_sym] }
+  end
+
+  def full_discipline
+    FULL_DISCIPLINES[discipline.to_sym]
+  end
+
   def captains
     users.where(captain: true)
   end
