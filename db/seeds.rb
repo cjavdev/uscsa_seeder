@@ -42,22 +42,28 @@ b_team = b_school.teams.where(
 
 
 puts "Building athletes..."
-10.times do |x|
-  a_team.athletes.create!(
-    bib_number: x,
-    sex: 0,
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    uscsa_number: 73 + x,
-  )
+if a_team.athletes.count < 10
+  10.times do |x|
+    a_team.athletes.create!(
+      bib_number: x,
+      sex: 0,
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      uscsa_number: 73 + x,
+    )
+  end
+end
 
-  b_team.athletes.create!(
-    bib_number: 10 + x,
-    sex: 1,
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    uscsa_number: 217 + x,
-  )
+if b_team.athletes.count < 10
+  10.times do |x|
+    b_team.athletes.create!(
+      bib_number: 10 + x,
+      sex: 1,
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      uscsa_number: 217 + x,
+    )
+  end
 end
 
 cj.athlete_id = Athlete.last.id
@@ -71,7 +77,7 @@ february_meet = Meet.where(
   name: "February Meet. Second of the year",
 ).first_or_create!
 
-today = Date.today
+today = Date.current.to_date.to_time
 
 first_jan_event = january_meet.events.where(
   meet_id: january_meet.id,
