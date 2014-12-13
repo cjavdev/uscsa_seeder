@@ -14,7 +14,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     meet = @event.meet
     @event.try(:destroy)
-    redirect_to meet
+    redirect_to meets_path
   end
 
   private
