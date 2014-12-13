@@ -28,4 +28,35 @@ class Athlete < ActiveRecord::Base
   def name
     "#{ first_name } #{ last_name }"
   end
+
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << [
+          "id",
+          "team_id",
+          "bib_number",
+          "eligible",
+          "first_name",
+          "last_name",
+          "sex",
+          "created_at",
+          "updated_at",
+          "uscsa_number",
+      ]
+      all.each do |athlete|
+        csv << [
+          athlete.id,
+          athlete.team_id,
+          athlete.bib_number,
+          athlete.eligible,
+          athlete.first_name,
+          athlete.last_name,
+          athlete.sex,
+          athlete.created_at,
+          athlete.updated_at,
+          athlete.uscsa_number,
+        ]
+      end
+    end
+  end
 end
