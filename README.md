@@ -5,7 +5,8 @@ a season of snow sport contests.
 
 + Athlete(id, bib_number, discipline, uscsa_num, eligible, school_id,
   first_name, last_name, gender)
-+ Participant(id, athlete_id, race_id, seed_num)
++ Participant(id, athlete_id, race_id, seed_num) (rename: Participation?
+EventEntry? AthleteEventEntry?)
 + Race(id, event_id, date, start_time, gender, race_type)
 + Team(id, school_id, discipline, gender)
 + School(id, name, abbreviation)
@@ -15,11 +16,11 @@ a season of snow sport contests.
 
 # User Stories
 
-+  Officer can login
-+  Captain can login
-+  Officer can manage all teams
-+  Officer can manage all athletes
-+  Captain can manage athletes from her team
++  ~~ Officer can login ~~
++  ~~ Captain can login ~~
++  ~~ Officer can manage all teams ~~
++  ~~ Officer can manage all athletes ~~
++  ~~ Captain can manage athletes from her team ~~
 +  Officer can import race data
 +  Officer can import athlete data
 +  Officer can invite up to three Captains per
