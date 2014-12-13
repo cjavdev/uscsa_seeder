@@ -8,5 +8,6 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:invite).concat [:athlete_id]
+    devise_parameter_sanitizer.for(:accept_invitation).concat [:captain]
   end
 end

@@ -8,6 +8,7 @@
         <br>
         <%= devise_error_messages! %>
         <%= f.hidden_field :invitation_token %>
+        <%= f.hidden_field :captain, value: true %>
 
         <div class='form-group'>
           <%= f.label :password, class: "col-md-2 col-md-offset-1 control-label" %>
