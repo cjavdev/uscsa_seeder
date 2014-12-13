@@ -9,7 +9,7 @@
 			<tr>
 				<th>#</th>
         <th>Start At</th>
-        <th>Seeding Closes At</th>
+        <th>Registration Closes At</th>
         <th>Type</th>
 				<th>Discipline</th>
         <th>Sex</th>
@@ -23,7 +23,7 @@
           <td> <%= event.start_at.strftime("%B %d at %I:%M %p %Z") %> </td>
           <td> <%= event.seeding_closes_at.strftime("%B %d at %I:%M %p") %> </td>
           <td> <%= event.full_race_type %> </td>
-          <td> <%= event.discipline %> </td>
+          <td> <%= event.discipline.split("_").map(&:capitalize).join(" ") %> </td>
           <td> <%= event.sex %> </td>
           <td>
             <%= button_to "Delete",
@@ -55,7 +55,7 @@
         </div>        <div class="form-group">
           <select name="event[discipline]" class="form-control">
             <% Team.disciplines.each do |discipline| %>
-            <option value="<%= discipline[0] %>"><%= discipline[0] %></option>
+            <option value="<%= discipline[0] %>"><%= discipline[0].split("_").map(&:capitalize).join(" ") %></option>
             <% end %>
           </select>
         </div>

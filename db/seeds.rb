@@ -67,12 +67,48 @@ january_meet = Meet.where(
   name: "January Meet. First of the year",
 ).first_or_create!
 
+february_meet = Meet.where(
+  name: "February Meet. Second of the year",
+).first_or_create!
+
 today = Date.today
 
-first_event = Event.where(
+first_jan_event = january_meet.events.where(
   meet_id: january_meet.id,
   start_at: today,
   sex: 0,
+  discipline: 1,
+  race_type: 1,
+).first_or_create!
+
+second_jan_event = january_meet.events.where(
+  meet_id: january_meet.id,
+  start_at: today + 1,
+  sex: 1,
+  discipline: 1,
+  race_type: 1,
+).first_or_create!
+
+third_jan_event = january_meet.events.where(
+  meet_id: january_meet.id,
+  start_at: today + 2,
+  sex: 0,
+  discipline: 2,
+  race_type: 2,
+).first_or_create!
+
+fourth_jan_event = january_meet.events.where(
+  meet_id: january_meet.id,
+  start_at: today + 3,
+  sex: 1,
+  discipline: 2,
+  race_type: 2,
+).first_or_create!
+
+first_feb_event = february_meet.events.where(
+  meet_id: february_meet.id,
+  start_at: today + 30,
+  sex: 1,
   discipline: 1,
   race_type: 1,
 ).first_or_create!
