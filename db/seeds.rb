@@ -71,7 +71,7 @@ february_meet = Meet.where(
   name: "February Meet. Second of the year",
 ).first_or_create!
 
-today = Date.today
+today = Date.current
 
 first_jan_event = january_meet.events.where(
   meet_id: january_meet.id,

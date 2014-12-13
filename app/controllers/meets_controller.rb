@@ -2,7 +2,7 @@ class MeetsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @meets = Meet.all
+    @meets = Meet.all.includes(:events)
   end
 
   def show

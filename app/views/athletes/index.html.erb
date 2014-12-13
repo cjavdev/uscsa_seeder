@@ -15,7 +15,7 @@
 		</thead>
 		<tbody>
 			<% i = 0 %>
-		  <% @schools.each do |school| %>
+		  <% @schools.includes(:athletes).each do |school| %>
 				<% school.teams.each do |team| %>
 					<% team.athletes.each do |athlete| %>
 						<tr>
