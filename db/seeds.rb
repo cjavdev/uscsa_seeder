@@ -62,3 +62,17 @@ end
 
 cj.athlete_id = Athlete.last.id
 cj.save!
+
+january_meet = Meet.where(
+  name: "January Meet. First of the year",
+).first_or_create!
+
+today = Date.today
+
+first_event = Event.where(
+  meet_id: january_meet.id,
+  start_at: today,
+  sex: 0,
+  discipline: 1,
+  race_type: 1,
+).first_or_create!

@@ -14,6 +14,7 @@
 
 class Event < ActiveRecord::Base
   validates :meet, :start_at, :sex, :discipline, presence: true
+  after_create :increment_events_count
 
   enum sex: [:male, :female]
   enum discipline: [:free_style_ski, :alpine_ski, :snowboard]
@@ -40,5 +41,10 @@ class Event < ActiveRecord::Base
 
   def seeding_closes_at
     (start_at - 1.day).to_date.to_time + 17.hours
+  end
+  
+  def increment_events_count
+    self.meet.events_count += 1;
+    self.meet.save!
   end
 end

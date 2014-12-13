@@ -1,32 +1,43 @@
 <div class="col-md-8">
   <h1>Meets</h1>
 
-  <table class='table table-hover'>
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>Name</th>
-				<th>Events</th>
-        <th>&nbsp;</th>
-			</tr>
-		</thead>
-		<tbody>
-		  <% @meets.each do |meet| %>
-        <tr>
-          <td> <%= meet.id %> </td>
-          <td> <%= link_to meet.name, meet %> </td>
-          <td> <%= meet.events_count %> </td>
-          <td>
-            <%= button_to "Delete",
-              meet,
-              method: :delete,
-              class: "btn btn-xs btn-danger",
-              data: { confirm: "Are you sure you want to delete this meet?" } %>
-          </td>
-        </tr>
-		  <% end %>
-		</tbody>
-  </table>
+	<ul>
+		<% @meets.each do |meet| %>
+			<li> <%= link_to meet.name, meet %> </li>
+		  <table class='table table-hover'>
+				<thead>
+					<tr>
+						<th>#</th>
+		        <th>Start At</th>
+		        <th>Seeding Closes At</th>
+		        <th>Type</th>
+						<th>Discipline</th>
+		        <th>Sex</th>
+		        <th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% meet.events.each do |event| %>
+		        <tr>
+		          <td> <%= event.id %> </td>
+		          <td> <%= event.start_at.strftime("%B %d at %I:%M %p %Z") %> </td>
+		          <td> <%= event.seeding_closes_at.strftime("%B %d at %I:%M %p") %> </td>
+		          <td> <%= event.full_race_type %> </td>
+		          <td> <%= event.discipline.split("_").map(&:capitalize).join(" ") %> </td>
+		          <td> <%= event.sex %> </td>
+		          <td>
+		            <%= button_to "Delete",
+		              event,
+		              method: :delete,
+		              class: "btn btn-xs btn-danger",
+		              data: { confirm: "Are you sure you want to delete this event?" } %>
+		          </td>
+		        </tr>
+				  <% end %>
+				</tbody>
+		  </table>
+		<% end %>
+	</ul>
 
   <% if current_user.admin %>
   <div class="well">
