@@ -1,9 +1,10 @@
 <div class="col-md-8">
   <h1>Meets</h1>
 
-	<ul>
+
+	<ul class="list-group">
 		<% @meets.each do |meet| %>
-			<li> <%= link_to meet.name, meet %> </li>
+			<li class="list-group-item"> <%= link_to meet.name, meet %> </li>
 		  <table class='table table-hover'>
 				<thead>
 					<tr>
