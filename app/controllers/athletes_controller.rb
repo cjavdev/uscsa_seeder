@@ -4,8 +4,10 @@ class AthletesController < ApplicationController
   before_filter :set_schools
 
   def index
-    # TODO: limit this for captains
-    @athlete = Athlete.new
+    respond_to do |format|
+      format.html { @athlete = Athlete.new }
+      format.csv { send_data @athletes.to_csv }
+    end
   end
 
   def show
