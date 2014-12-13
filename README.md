@@ -17,10 +17,10 @@ EventEntry? AthleteEventEntry?)
 # User Stories
 
 +  ~~Officer can login~~
-+  ~~ Captain can login ~~
-+  ~~ Officer can manage all teams ~~
-+  ~~ Officer can manage all athletes ~~
-+  ~~ Captain can manage athletes from her team ~~
++  ~~Captain can login~~
++  ~~Officer can manage all teams~~
++  ~~Officer can manage all athletes~~
++  ~~Captain can manage athletes from her team~~
 +  Officer can import race data
 +  Officer can import athlete data
 +  Officer can invite up to three Captains per
