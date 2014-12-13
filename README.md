@@ -16,7 +16,7 @@ EventEntry? AthleteEventEntry?)
 
 # User Stories
 
-+  ~~ Officer can login ~~
++  ~~Officer can login~~
 +  ~~ Captain can login ~~
 +  ~~ Officer can manage all teams ~~
 +  ~~ Officer can manage all athletes ~~
