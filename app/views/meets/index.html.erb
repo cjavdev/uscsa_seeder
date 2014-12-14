@@ -25,7 +25,13 @@
 		          <td> <%= event.seeding_closes_at.strftime("%B %d at %I:%M %p") %> </td>
 		          <td> <%= event.full_race_type %> </td>
 		          <td> <%= event.discipline.split("_").map(&:capitalize).join(" ") %> </td>
-		          <td> <%= event.sex %> </td>
+		          <td> <%= event.sex.capitalize %> </td>
+							<td>
+								<%= button_to "Seed",
+									seed_url(event),
+									method: :get,
+									class: "btn btn-xs btn-warning" %>
+							 </td>
 		          <td>
 		            <%= button_to "Delete",
 		              event,

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :meets do
     resources :events, shallow: true
+    resources :seeds, shallow: true
   end
 
   resources :schools do

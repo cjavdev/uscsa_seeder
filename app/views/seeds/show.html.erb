@@ -1,0 +1,30 @@
+<div class='col-md-8'>
+	<h1> <%= @event.full_race_type %> <span class='orange'>|</span> <%= @event.discipline.split("_").map(&:capitalize).join(" ") %> <span class='orange'>|</span> <%= @event.sex.capitalize %> </h1>
+	<%= link_to "All Meets", meets_path %>
+	<div class='well'>
+		<form action='<%= edit_seed_url(@event) %>' method='post'>
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			<% if @team %>
+				<div class='form-group'>
+					<select name="user[athlete_id]" class="form-control">
+						<% @team.athletes.each do |athlete| %>
+							<option value="<%= athlete.id %>"><%= athlete.name %></option>
+						<% end %>
+					</select>
+				</div>
+			<% else %>
+				<% School.all.includes(:teams).each do |school| %>
+					<h3> <%= school.name %> </h3>
+					<div class='form-group'>
+						<h4> <%=  %>
+						<select name="user[athlete_id]" class="form-control">
+							<% school.teams.find_by({ discipline: @event.discipline, sex: @event.sex }).athletes.each do |athlete| %>							
+								<option value='<%= athlete.id %>'><%= athlete.name %></option>
+							<% end %>
+						</select>
+					</div>
+				<% end %>
+			<% end %>
+		</form>
+	</div>
+</div>

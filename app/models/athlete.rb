@@ -19,6 +19,7 @@ class Athlete < ActiveRecord::Base
   default_scope { order(:last_name, :first_name) }
   enum sex: [:male, :female]
   belongs_to :team
+  has_one :school, through: :team
   has_one :user
 
   def captain?
