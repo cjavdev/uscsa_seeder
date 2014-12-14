@@ -13,7 +13,8 @@
 					</select>
 				</div>
 			<% else %>
-				<% School.all.each do |school| %>
+				<!-- TODO: make jbuilder -->
+				<% School.includes(:teams, :athletes).all.each do |school| %>
 					<h3> <%= school.name %> </h3>
 					  <table class='table table-hover'>
 							<thead>
