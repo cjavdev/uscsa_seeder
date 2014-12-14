@@ -13,16 +13,44 @@
 					</select>
 				</div>
 			<% else %>
-				<% School.all.includes(:teams).each do |school| %>
+				<% School.all.each do |school| %>
 					<h3> <%= school.name %> </h3>
-					<div class='form-group'>
-						<h4> <%=  %>
-						<select name="user[athlete_id]" class="form-control">
-							<% school.teams.find_by({ discipline: @event.discipline, sex: @event.sex }).athletes.each do |athlete| %>							
+					  <table class='table table-hover'>
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Eligable</th>
+									<th>Bib Number</th>
+									<th>USCSA Number</th>
+									<th>Seed</th>
+								</tr>
+							</thead>
+							<tbody>
+									<% school.teams.each do |team| %>
+										<% team.athletes.each_with_index do |athlete, i| %>
+											<tr>
+									    	<td><%= link_to athlete.name, athlete_path(athlete) %></td>
+												<td> <% if athlete.eligible %> Eligable <% else %> Not Eligable <% end %></td>
+												<td><%= athlete.bib_number %></td>
+												<td><%= athlete.uscsa_number %></td>
+												<td>
+													<div class="form-group">
+														<select name="athlete[seed_num]">
+															<% team.athletes.count.times do |x| %>
+																<option <% if x == i %> selected <% end %>><%= x %></option>
+															<% end %>
+															<option> Not Racing </option>
+														</select>
+													</div>
+												</td>
+											</tr>
+									  <% end %>
+									<% end %>
+							</tbody>
+					  </table>
+							<!-- <% school.teams.find_by({ discipline: @event.discipline, sex: @event.sex }).athletes.each do |athlete| %>
 								<option value='<%= athlete.id %>'><%= athlete.name %></option>
-							<% end %>
-						</select>
-					</div>
+							<% end %> -->
 				<% end %>
 			<% end %>
 		</form>
