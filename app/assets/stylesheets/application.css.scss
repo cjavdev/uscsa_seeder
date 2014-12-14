@@ -51,9 +51,19 @@ html, body {
   margin-bottom: -60px;
 }
 
+#wrap:after {
+  content: "";
+  display: block;
+  height: 60px; 	
+}
+
 /* Set the fixed height of the footer here */
 #footer {
   height: 60px;
   text-align: center;
   background-color: #4e5d6c;
+}
+
+.sidebar-wrapper {
+	padding-top: 30px;
 }
