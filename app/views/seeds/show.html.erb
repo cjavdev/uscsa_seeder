@@ -35,11 +35,15 @@
 												<td><%= athlete.uscsa_number %></td>
 												<td>
 													<div class="form-group">
-														<select name="athlete[seed_num]">
+														<select name="athlete[seed_num]" class='seed-number'>
 															<% team.athletes.count.times do |x| %>
-																<option <% if athlete.seeded(@event.id) == x %> selected <% end %>><%= x + 1 %></option>
+																<option data-id='<%= athlete.seed(@event.id).id %>' <% if athlete.seeded(@event.id) == x %> selected <% end %>>
+																	<%= x + 1 %>
+																</option>
 															<% end %>
-															<option <% if athlete.seeded(@event.id) == -1 %> selected <% end %>> Not Racing </option>
+															<option data-id='<%= athlete.seed(@event.id).id %>' <% if athlete.seeded(@event.id) == -1 %> selected <% end %>>
+																Not Racing
+															</option>
 														</select>
 													</div>
 												</td>
@@ -53,3 +57,15 @@
 		</form>
 	</div>
 </div>
+<script>
+	(function() {
+		$('.seed-number').change(function(event) {
+			var option = $(event.currentTarget).find("option:selected");
+	    $.ajax({
+	    	url: '/seeds/' + option.data('id'),
+				data: { seeded: Number(option.val()) - 1 },
+				type: "PATCH"
+	    });
+		})
+	})();
+</script>

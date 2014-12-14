@@ -13,7 +13,10 @@ class SeedsController < ApplicationController
   end
   
   def update
-    
+    seed = Seed.find(params[:id])
+    seed.seeded = params[:seeded]
+    seed.save
+    render nothing: true
   end
     
 end

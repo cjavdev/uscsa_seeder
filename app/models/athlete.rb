@@ -26,7 +26,11 @@ class Athlete < ActiveRecord::Base
   enum sex: [:male, :female]
   
   def seeded(event_id)
-    self.seeds.find_by(event_id: event_id).seeded
+    self.seed(event_id).seeded
+  end
+  
+  def seed(event_id)
+    self.seeds.find_by(event_id: event_id)
   end
   
   def captain?
