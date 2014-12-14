@@ -13,15 +13,16 @@
 #
 
 class Event < ActiveRecord::Base
+  belongs_to :meet
+  has_many :seeds, dependent: :destroy
+  
   validates :meet, :start_at, :sex, :discipline, presence: true
-  after_create :increment_events_count
+  after_create :increment_events_count, :create_seeds
 
   enum sex: [:male, :female]
   enum discipline: [:free_style_ski, :alpine_ski, :snowboard]
   enum race_type: [:gs, :s, :bx, :sx, :ss, :rj]
-
-  belongs_to :meet
-
+  
   FULL_RACE_TYPES = {
     gs: 'Giant Slalom',
     s: 'Slalom',
@@ -30,6 +31,10 @@ class Event < ActiveRecord::Base
     ss: 'Slopestyle',
     rj: 'Rail Jam'
   }
+  
+  def create_seeds
+    Athlete.all.each { |athlete| Seed.create(athlete_id: athlete.id, event_id: self.id) }
+  end
 
   def self.full_race_types
     race_types.keys.map { |t| FULL_RACE_TYPES[t.to_sym] }

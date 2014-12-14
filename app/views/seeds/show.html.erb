@@ -13,8 +13,7 @@
 					</select>
 				</div>
 			<% else %>
-				<!-- TODO: make jbuilder -->
-				<% School.includes(:teams, :athletes).all.each do |school| %>
+				<% @schools.each do |school| %>
 					<h3> <%= school.name %> </h3>
 					  <table class='table table-hover'>
 							<thead>
@@ -38,9 +37,9 @@
 													<div class="form-group">
 														<select name="athlete[seed_num]">
 															<% team.athletes.count.times do |x| %>
-																<option <% if x == i %> selected <% end %>><%= x %></option>
+																<option <% if athlete.seeded(@event.id) == x %> selected <% end %>><%= x + 1 %></option>
 															<% end %>
-															<option> Not Racing </option>
+															<option <% if athlete.seeded(@event.id) == -1 %> selected <% end %>> Not Racing </option>
 														</select>
 													</div>
 												</td>
@@ -49,9 +48,6 @@
 									<% end %>
 							</tbody>
 					  </table>
-							<!-- <% school.teams.find_by({ discipline: @event.discipline, sex: @event.sex }).athletes.each do |athlete| %>
-								<option value='<%= athlete.id %>'><%= athlete.name %></option>
-							<% end %> -->
 				<% end %>
 			<% end %>
 		</form>
