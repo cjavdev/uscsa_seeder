@@ -12,6 +12,7 @@
   <div class="form-group">
     <input
       type="text"
+			id='athlete-first-name'
       name="athlete[first_name]"
       placeholder="First Name"
       class="form-control"
@@ -20,6 +21,7 @@
   <div class="form-group">
     <input
       type="text"
+			id='athlete-last-name'			
       name="athlete[last_name]"
       placeholder="Last Name"
       class="form-control"
@@ -100,7 +102,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <%= render "captains/form" %>
+        <%= render "captains/form", new_athlete: true %>
       </div>
     </div>
   </div>

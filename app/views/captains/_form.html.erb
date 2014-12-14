@@ -4,14 +4,33 @@
   <form action="<%= user_invitation_path %>" method="post">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
     <div class="form-group">
-      <select name="user[athlete_id]" class="form-control">
-        <% School.includes(:athletes).all.each do |school| %>
-          <optgroup label="<%= school.abbreviation %>">
-            <% school.athletes.each do |athlete| %>
-              <option value="<%= athlete.id %>"><%= athlete.name %></option>
-            <% end %>
-          </optgroup>
-        <% end %>
+				<% if new_athlete %>
+				  <div class="form-group">
+				    <input
+				      type="text"
+							id='captain-first-name'
+				      name="athlete[first_name]"
+				      placeholder="First Name"
+				      class="form-control">
+				  </div>
+				  <div class="form-group">
+				    <input
+				      type="text"
+							id='captain-last-name'
+				      name="athlete[last_name]"
+				      placeholder="Last Name"
+				      class="form-control">
+				  </div>
+				<% else %>
+				<select name="user[athlete_id]" class="form-control">
+	        <% School.includes(:athletes).all.each do |school| %>
+	          <optgroup label="<%= school.abbreviation %>">
+	            <% school.athletes.each do |athlete| %>
+	              <option value="<%= athlete.id %>"><%= athlete.name %></option>
+	            <% end %>
+	          </optgroup>
+	        <% end %>
+				<% end %>
       </select>
     </div>
     <div class="form-group">
@@ -20,3 +39,18 @@
     <input type="submit" value="Invite" class="btn btn-primary">
   </form>
 </div>
+
+<script>
+	(function() {
+		var newAthlete = <%= new_athlete %>;
+		debugger
+		if(newAthlete){
+			$("#captain-checkbox").on("click", function(event) {
+				if($(event.currentTarget).prop('checked')) {
+			 		$('#captain-first-name').val($('#athlete-first-name').val());
+					$('#captain-last-name').val($('#athlete-last-name').val());
+				}
+			});
+		}
+	})();
+</script>
