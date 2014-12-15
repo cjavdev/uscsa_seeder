@@ -18,13 +18,15 @@
           <td> <%= link_to school.abbreviation, school %> </td>
           <td> <%= link_to school.name, school %> </td>
           <td> <%= school.teams_count %> </td>
-          <td>
-            <%= button_to 'Delete',
-              school,
-              method: :delete,
-              class: 'btn btn-xs btn-danger',
-              data: { confirm: 'Are you sure you want to delete this school?' } %>
-          </td>
+					<% if current_user.admin || current_user.officer %>
+	          <td>
+	            <%= button_to 'Delete',
+	              school,
+	              method: :delete,
+	              class: 'btn btn-xs btn-danger',
+	              data: { confirm: 'Are you sure you want to delete this school?' } %>
+	          </td>
+					<% end %>
         </tr>
 		  <% end %>
 		</tbody>
