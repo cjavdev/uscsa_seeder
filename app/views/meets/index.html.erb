@@ -31,14 +31,16 @@
 									seed_url(event),
 									method: :get,
 									class: "btn btn-xs btn-warning" %>
-							 </td>
-		          <td>
-		            <%= button_to "Delete",
-		              event,
-		              method: :delete,
-		              class: "btn btn-xs btn-danger",
-		              data: { confirm: "Are you sure you want to delete this event?" } %>
-		          </td>
+							</td>
+							<% if current_user.admin || current_user.officer %>
+			          <td>
+			            <%= button_to "Delete",
+			              event,
+			              method: :delete,
+			              class: "btn btn-xs btn-danger",
+			              data: { confirm: "Are you sure you want to delete this event?" } %>
+			          </td>
+							<% end %>
 		        </tr>
 				  <% end %>
 				</tbody>
