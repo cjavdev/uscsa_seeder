@@ -2,59 +2,84 @@
 	<h1> <%= @event.full_race_type %> <span class='orange'>|</span> <%= @event.discipline.split("_").map(&:capitalize).join(" ") %> <span class='orange'>|</span> <%= @event.sex.capitalize %> </h1>
 	<%= link_to "All Meets", meets_path %>
 	<div class='well'>
-		<form action='<%= edit_seed_url(@event) %>' method='post'>
-			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-			<% if @team %>
-				<div class='form-group'>
-					<select name="user[athlete_id]" class="form-control">
-						<% @team.athletes.each do |athlete| %>
-							<option value="<%= athlete.id %>"><%= athlete.name %></option>
-						<% end %>
-					</select>
-				</div>
-			<% else %>
-				<% @schools.each do |school| %>
-					<h3> <%= school.name %> </h3>
-					  <table class='table table-hover'>
-							<thead>
-								<tr>
-									<th>Name</th>
-									<th>Eligable</th>
-									<th>Bib Number</th>
-									<th>USCSA Number</th>
-									<th>Seed</th>
-								</tr>
-							</thead>
-							<tbody>
-									<% school.teams.each do |team| %>
-										<% team.athletes.each_with_index do |athlete, i| %>
-											<tr>
-									    	<td><%= link_to athlete.name, athlete_path(athlete) %></td>
-												<td> <% if athlete.eligible %> Eligable <% else %> Not Eligable <% end %></td>
-												<td><%= athlete.bib_number %></td>
-												<td><%= athlete.uscsa_number %></td>
-												<td>
-													<div class="form-group">
-														<select name="athlete[seed_num]" class='seed-number'>
-															<% team.athletes.count.times do |x| %>
-																<option data-id='<%= athlete.seed(@event.id).id %>' <% if athlete.seeded(@event.id) == x %> selected <% end %>>
-																	<%= x + 1 %>
-																</option>
-															<% end %>
-															<option data-id='<%= athlete.seed(@event.id).id %>' <% if athlete.seeded(@event.id) == -1 %> selected <% end %>>
-																Not Racing
+		<% if @team %>
+		  <table class='table table-hover'>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Eligable</th>
+						<th>Bib Number</th>
+						<th>USCSA Number</th>
+						<th>Seed</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @team.athletes.each do |athlete| %>
+						<tr>
+				    	<td><%= link_to athlete.name, athlete_path(athlete) %></td>
+							<td> <% if athlete.eligible %> Eligable <% else %> Not Eligable <% end %></td>
+							<td><%= athlete.bib_number %></td>
+							<td><%= athlete.uscsa_number %></td>
+							<td>
+								<div class="form-group">
+									<select name="athlete[seed_num]" class='seed-number'>
+										<% @team.athletes.count.times do |x| %>
+											<option data-id='<%= athlete.seed(@event.id).id %>' <% if athlete.seeded(@event.id) == x %> selected <% end %>>
+												<%= x + 1 %>
+											</option>
+										<% end %>
+										<option data-id='<%= athlete.seed(@event.id).id %>' <% if athlete.seeded(@event.id) == -1 %> selected <% end %>>
+											Not Racing
+										</option>
+									</select>
+								</div>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		<% else %>
+			<% @schools.each do |school| %>
+				<h3> <%= school.name %> </h3>
+				  <table class='table table-hover'>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Eligable</th>
+								<th>Bib Number</th>
+								<th>USCSA Number</th>
+								<th>Seed</th>
+							</tr>
+						</thead>
+						<tbody>
+								<% school.teams.each do |team| %>
+									<% team.athletes.each_with_index do |athlete, i| %>
+										<tr>
+								    	<td><%= link_to athlete.name, athlete_path(athlete) %></td>
+											<td> <% if athlete.eligible %> Eligable <% else %> Not Eligable <% end %></td>
+											<td><%= athlete.bib_number %></td>
+											<td><%= athlete.uscsa_number %></td>
+											<td>
+												<div class="form-group">
+													<select name="athlete[seed_num]" class='seed-number'>
+														<% team.athletes.count.times do |x| %>
+															<option data-id='<%= athlete.seed(@event.id).id %>' <% if athlete.seeded(@event.id) == x %> selected <% end %>>
+																<%= x + 1 %>
 															</option>
-														</select>
-													</div>
-												</td>
-											</tr>
-									  <% end %>
-									<% end %>
-							</tbody>
-					  </table>
-				<% end %>
+														<% end %>
+														<option data-id='<%= athlete.seed(@event.id).id %>' <% if athlete.seeded(@event.id) == -1 %> selected <% end %>>
+															Not Racing
+														</option>
+													</select>
+												</div>
+											</td>
+										</tr>
+								  <% end %>
+								<% end %>
+						</tbody>
+				  </table>
 			<% end %>
-		</form>
+		<% end %>
 	</div>
 </div>
 <script>

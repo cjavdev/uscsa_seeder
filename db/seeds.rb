@@ -13,7 +13,8 @@ danny = User.where(
 
 cj = User.where(
   email: "cjavilla@gmail.com",
-  captain: true
+  captain: true,
+  athlete_id: 1,
 ).first_or_create!(password: 'password')
 
 puts "Building UNR..."

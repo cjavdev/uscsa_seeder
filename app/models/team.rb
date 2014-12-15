@@ -11,14 +11,15 @@
 #
 
 class Team < ActiveRecord::Base
+  
+  belongs_to :school
+  has_many :athletes
+  has_many :users, through: :athletes
+  
   validates :school, :discipline, :sex, presence: true
 
   enum sex: [:male, :female]
   enum discipline: [:free_style_ski, :alpine_ski, :snowboard]
-
-  belongs_to :school
-  has_many :athletes
-  has_many :users, through: :athletes
 
   FULL_DISCIPLINES = {
     free_style_ski: 'Free Style Ski',
