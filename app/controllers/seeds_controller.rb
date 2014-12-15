@@ -5,7 +5,7 @@ class SeedsController < ApplicationController
     if current_user.captain?
       @team = current_user.athlete.school.teams.where({ discipline: @event.discipline, sex: @event.sex }).first
     else
-      @schools = School.all.includes({teams: :athletes})
+      @teams = Team.all.includes(:athletes, :school).where({ discipline: @event.discipline, sex: @event.sex })
     end    
     render :show
   end

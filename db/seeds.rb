@@ -31,38 +31,74 @@ b_school = School.where(
 
 
 puts "Building team..."
-a_team = a_school.teams.where(
+a_team_1 = a_school.teams.where(
   sex: 0,
   discipline: 0
 ).first_or_create!
 
-b_team = b_school.teams.where(
+a_team_2 = a_school.teams.where(
+  sex: 1,
+  discipline: 0
+).first_or_create!
+
+a_team_3 = a_school.teams.where(
+  sex: 0,
+  discipline: 1
+).first_or_create!
+
+a_team_4 = a_school.teams.where(
+  sex: 1,
+  discipline: 1
+).first_or_create!
+
+b_team_1 = b_school.teams.where(
   sex: 0,
   discipline: 0
 ).first_or_create!
 
 
 puts "Building athletes..."
-10.times do |x|
-  a_team.athletes.create!(
+5.times do |x|
+  a_team_1.athletes.create!(
     bib_number: x,
     sex: 0,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    uscsa_number: 73 + x,
+    uscsa_number: x,
   )
-
-  b_team.athletes.create!(
-    bib_number: 10 + x,
+  
+  a_team_2.athletes.create!(
+    bib_number: x,
     sex: 1,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    uscsa_number: 217 + x,
+    uscsa_number: 100 + x,
   )
+  a_team_3.athletes.create!(
+    bib_number: x,
+    sex: 0,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    uscsa_number: 200 + x,
+  )
+  
+  a_team_4.athletes.create!(
+    bib_number: x,
+    sex: 1,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    uscsa_number: 300 + x,
+  )
+  
+  b_team_1.athletes.create!(
+    bib_number: x,
+    sex: 0,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    uscsa_number:400 + x,
+  )
+  
 end
-
-cj.athlete_id = Athlete.last.id
-cj.save!
 
 january_meet = Meet.where(
   name: "January Meet. First of the year",
@@ -78,32 +114,32 @@ first_jan_event = january_meet.events.where(
   meet_id: january_meet.id,
   start_at: today,
   sex: 0,
-  discipline: 1,
-  race_type: 1,
+  discipline: 0,
+  race_type: 0,
 ).first_or_create!
 
 second_jan_event = january_meet.events.where(
   meet_id: january_meet.id,
   start_at: today + 1,
   sex: 1,
-  discipline: 1,
-  race_type: 1,
+  discipline: 0,
+  race_type: 0,
 ).first_or_create!
 
 third_jan_event = january_meet.events.where(
   meet_id: january_meet.id,
   start_at: today + 2,
   sex: 0,
-  discipline: 2,
-  race_type: 2,
+  discipline: 1,
+  race_type: 1,
 ).first_or_create!
 
 fourth_jan_event = january_meet.events.where(
   meet_id: january_meet.id,
   start_at: today + 3,
   sex: 1,
-  discipline: 2,
-  race_type: 2,
+  discipline: 1,
+  race_type: 1,
 ).first_or_create!
 
 first_feb_event = february_meet.events.where(
