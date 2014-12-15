@@ -26,13 +26,10 @@ class AthletesController < ApplicationController
 
   def update
     @athlete = @athletes.find(params[:id])
-
-    if @athlete.update(athlete_params)
-      redirect_to @athlete
-    else
+    unless @athlete.update(athlete_params)
       flash.now[:errors] = @athlete.errors.full_messages
-      render :show
     end
+    render nothing: true
   end
 
   private
@@ -51,9 +48,9 @@ class AthletesController < ApplicationController
 
   def athlete_params
     if current_user.admin
-      params.require(:athlete).permit(:uscsa_number, :first_name, :last_name, :bib_number, :sex, :discipline, :team_id)
+      params.require(:athlete).permit(:uscsa_number, :first_name, :last_name, :bib_number, :sex, :discipline, :team_id, :eligible)
     else
-      params.require(:athlete).permit(:uscsa_number, :first_name, :last_name, :bib_number, :sex, :discipline)
+      params.require(:athlete).permit(:uscsa_number, :first_name, :last_name, :bib_number, :sex, :discipline, :eligible)
     end
   end
 end
