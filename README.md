@@ -3,16 +3,14 @@
 **Pitch**: This is a tool for managing a league of athletes through out
 a season of snow sport contests.
 
-+ Athlete(id, bib_number, discipline, uscsa_num, eligible, school_id,
-  first_name, last_name, gender)
-+ Participant(id, athlete_id, race_id, seed_num) (rename: Participation?
-EventEntry? AthleteEventEntry?)
-+ Race(id, event_id, date, start_time, gender, race_type)
-+ Team(id, school_id, discipline, gender)
-+ School(id, name, abbreviation)
-+ User(id, email, password_digest, session_token, invitation_token, 
-  invitation_expiration, officer, captain, school_id, verified)
-+ Event(id, date, name, abbreviation)
++ ~~Athlete(id, bib_number, discipline, uscsa_number, eligible, team_id,
+  first_name, last_name, gender)~~
++ ~~Team(id, school_id, discipline, gender)~~
++ ~~School(id, name, abbreviation, teams_count)~~
++ ~~User(id, email, encrypted_password, invitation_token, 
+  invitation_expiration, officer, captain, admin, athlete_id, school_id)~~
++ ~~Event(id, meet_id, start_at, sex, discipline, race_type)~~
++ ~~Meet(id, name, events_count)~~
 
 # User Stories
 
@@ -23,8 +21,8 @@ EventEntry? AthleteEventEntry?)
 +  ~~Captain can manage athletes from her team~~
 +  Officer can import race data
 +  Officer can import athlete data
-+  Officer can invite up to three Captains per
-+  Captain can seed athletes to races
++  ~~Captain can seed athletes to races~~
++  Captain/Officer can only seed one racer per position
 +  When its race day
    + Captain sees read only roster
 +  Officer can pull reports that:
@@ -41,9 +39,9 @@ EventEntry? AthleteEventEntry?)
 
 # Seeding Rules
 
-+  Each school is allowed to seed as many athletes as they like that are on their team.
-+  Men are seeded with men, women with women.
-+  Skiers and snowboarders do not overlap.
++  ~~Each school is allowed to seed as many athletes as they like that are on their team.~~
++  ~~Men are seeded with men, women with women.~~
++  ~~Skiers and snowboarders do not overlap.~~
 +  Online seeding closes at 5 PM the day before the race.
 +  For timed events (GS, SL), use the seed order as your start list.
 +  For style events (SLP, HP, QP, JAM), use the seeds in the reverse
@@ -64,5 +62,3 @@ team.  Then the 2nd seeds are all randomly sorted, then the 3rd seeds
 are randomly sorted and so on and so forth.  This would get exported as
 a .csv or .txt file.  Then this would be imported to the SplitSecond
 timing system at Mammoth Mountain in a format they can use.
-
-**NB**: Maybe we should allow Officers to invite unlimited captains per school because it looks like he said two captains per school and then two or three captains per school in the same email
