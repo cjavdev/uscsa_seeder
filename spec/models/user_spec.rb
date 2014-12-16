@@ -33,4 +33,30 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
   it 'can not be both officer and captain'
+
+  describe '#managed_teams' do
+    context 'when the user is an admin' do
+      it 'returns all the teams' do
+        user = FactoryGirl.create(:user, admin: true)
+        FactoryGirl.create(:team)
+        FactoryGirl.create(:team)
+        expect(user.managed_teams.map(&:id)).to eq(Team.all.map(&:id))
+      end
+    end
+
+    context 'when the user is a captain' do
+      it 'returns just the teams from the same school as the captain' do
+        unr = FactoryGirl.create(:school)
+        unlv = FactoryGirl.create(:school)
+        team1 = FactoryGirl.create(:team, school: unr)
+        team2 = FactoryGirl.create(:team, school: unr)
+        FactoryGirl.create(:team, school: unlv)
+
+        athlete = FactoryGirl.create(:athlete, team: team1)
+        user = FactoryGirl.create(:user, captain: true, athlete: athlete)
+
+        expect(user.managed_teams.map(&:id)).to eq([team1.id, team2.id])
+      end
+    end
+  end
 end

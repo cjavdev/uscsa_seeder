@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20141214102920) do
     t.integer  "race_type",  default: 0
   end
 
+  add_index "events", ["meet_id"], name: "index_events_on_meet_id", using: :btree
+
   create_table "meets", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -100,9 +102,11 @@ ActiveRecord::Schema.define(version: 20141214102920) do
     t.integer  "invitations_count",      default: 0
   end
 
+  add_index "users", ["athlete_id"], name: "index_users_on_athlete_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
+  add_index "users", ["invited_by_id", "invited_by_type"], name: "index_users_on_invited_by_id_and_invited_by_type", using: :btree
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
