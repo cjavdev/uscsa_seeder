@@ -23,21 +23,23 @@
           </thead>
           <tbody>
             <% @teams.select { |t| t.school_id == school.id }.each do |team| %>
+              <% athlete_count = team.athletes.count %>
               <% team.athletes.each_with_index do |athlete, i| %>
                 <tr>
                   <td><%= link_to athlete.name, athlete_path(athlete) %></td>
-                  <td> <% if athlete.eligible %> Eligable <% else %> Not Eligable <% end %></td>
+                  <td><%= (athlete.eligible) ? 'Eligible' : 'Not Eligible' %></td>
                   <td><%= athlete.bib_number %></td>
                   <td><%= athlete.uscsa_number %></td>
                   <td>
                     <div class="form-group">
                       <select name="athlete[seed_num]" class='seed-number'>
-                        <% team.athletes.count.times do |x| %>
-                          <option data-id='<%= athlete.seed(@event.id).id %>' <% if athlete.seeded(@event.id) == x %> selected <% end %>>
+                        <% athlete_count.times do |x| %>
+                          <option data-athlete-id='<%= athlete.id %>'>
                             <%= x + 1 %>
                           </option>
                         <% end %>
-                        <option data-id='<%= athlete.seed(@event.id).id %>' <% if athlete.seeded(@event.id) == -1 %> selected <% end %>>
+
+                        <option data-athlete-id='<%= athlete.id %>'>
                           Not Racing
                         </option>
                       </select>
@@ -53,14 +55,18 @@
 </div>
 
 <script>
-	(function() {
+	$(function() {
 		$('.seed-number').change(function(event) {
-			var option = $(event.currentTarget).find("option:selected");
+      var $select = $(event.currentTarget);
+			var seedVal = $select.find("option:selected").val();
+			var athleteId = $select.find("option:selected").data('athlete-id');
+
+      // this needs to change.
 	    $.ajax({
 	    	url: '/seeds/' + option.data('id'),
 				data: { seeded: Number(option.val()) - 1 },
 				type: "PATCH"
 	    });
-		})
-	})();
+		});
+	});
 </script>
