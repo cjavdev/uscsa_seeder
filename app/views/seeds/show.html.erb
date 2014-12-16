@@ -33,15 +33,15 @@
                   <td>
                     <div class="form-group">
                       <select name="athlete[seed_num]" class='seed-number'>
+                        <option data-athlete-id='<%= athlete.id %>' selected>
+                          Not Racing
+                        </option>
                         <% athlete_count.times do |x| %>
                           <option data-athlete-id='<%= athlete.id %>'>
                             <%= x + 1 %>
                           </option>
                         <% end %>
 
-                        <option data-athlete-id='<%= athlete.id %>'>
-                          Not Racing
-                        </option>
                       </select>
                     </div>
                   </td>
