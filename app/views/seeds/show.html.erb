@@ -1,96 +1,72 @@
 <div class='col-md-8'>
-	<h1> <%= @event.full_race_type %> <span class='orange'>|</span> <%= @event.discipline.split("_").map(&:capitalize).join(" ") %> <span class='orange'>|</span> <%= @event.sex.capitalize %> </h1>
+	<h1> <%= @event.full_race_type %>
+    <span class='orange'>|</span>
+    <%= @event.discipline.split("_").map(&:capitalize).join(" ") %>
+    <span class='orange'>|</span>
+    <%= @event.sex.capitalize %>
+  </h1>
+
 	<%= link_to "All Meets", meets_path %>
+
 	<div class='well'>
-		<% if @team %>
-		  <table class='table table-hover'>
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Eligable</th>
-						<th>Bib Number</th>
-						<th>USCSA Number</th>
-						<th>Seed</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% @team.athletes.each do |athlete| %>
-						<tr>
-				    	<td><%= link_to athlete.name, athlete_path(athlete) %></td>
-							<td> <% if athlete.eligible %> Eligable <% else %> Not Eligable <% end %></td>
-							<td><%= athlete.bib_number %></td>
-							<td><%= athlete.uscsa_number %></td>
-							<td>
-								<div class="form-group">
-									<select name="athlete[seed_num]" class='seed-number'>
-										<% @team.athletes.count.times do |x| %>
-											<option data-id='<%= athlete.seed(@event.id).id %>' <% if athlete.seeded(@event.id) == x %> selected <% end %>>
-												<%= x + 1 %>
-											</option>
-										<% end %>
-										<option data-id='<%= athlete.seed(@event.id).id %>' <% if athlete.seeded(@event.id) == -1 %> selected <% end %>>
-											Not Racing
-										</option>
-									</select>
-								</div>
-							</td>
-						</tr>
-					<% end %>
-				</tbody>
-			</table>
-		<% else %>
-			<% @teams.map { |t| t.school }.uniq.each do |school| %>
-				<h3> <%= school.name %> </h3>
-				  <table class='table table-hover'>
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Eligable</th>
-								<th>Bib Number</th>
-								<th>USCSA Number</th>
-								<th>Seed</th>
-							</tr>
-						</thead>
-						<tbody>
-							<% @teams.select { |t| t.school_id == school.id }.each do |team| %>
-								<% team.athletes.each_with_index do |athlete, i| %>
-									<tr>
-							    	<td><%= link_to athlete.name, athlete_path(athlete) %></td>
-										<td> <% if athlete.eligible %> Eligable <% else %> Not Eligable <% end %></td>
-										<td><%= athlete.bib_number %></td>
-										<td><%= athlete.uscsa_number %></td>
-										<td>
-											<div class="form-group">
-												<select name="athlete[seed_num]" class='seed-number'>
-													<% team.athletes.count.times do |x| %>
-														<option data-id='<%= athlete.seed(@event.id).id %>' <% if athlete.seeded(@event.id) == x %> selected <% end %>>
-															<%= x + 1 %>
-														</option>
-													<% end %>
-													<option data-id='<%= athlete.seed(@event.id).id %>' <% if athlete.seeded(@event.id) == -1 %> selected <% end %>>
-														Not Racing
-													</option>
-												</select>
-											</div>
-										</td>
-									</tr>
-							  <% end %>
-							<% end %>
-						</tbody>
-				  </table>
-			<% end %>
+    <% @teams.map { |t| t.school }.uniq.each do |school| %>
+      <h3> <%= school.name %> </h3>
+        <table class='table table-hover'>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Eligable</th>
+              <th>Bib Number</th>
+              <th>USCSA Number</th>
+              <th>Seed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @teams.select { |t| t.school_id == school.id }.each do |team| %>
+              <% athlete_count = team.athletes.count %>
+              <% team.athletes.each_with_index do |athlete, i| %>
+                <tr>
+                  <td><%= link_to athlete.name, athlete_path(athlete) %></td>
+                  <td><%= (athlete.eligible) ? 'Eligible' : 'Not Eligible' %></td>
+                  <td><%= athlete.bib_number %></td>
+                  <td><%= athlete.uscsa_number %></td>
+                  <td>
+                    <div class="form-group">
+                      <select name="athlete[seed_num]" class='seed-number'>
+                        <option data-athlete-id='<%= athlete.id %>' selected>
+                          Not Racing
+                        </option>
+                        <% athlete_count.times do |x| %>
+                          <option data-athlete-id='<%= athlete.id %>'>
+                            <%= x + 1 %>
+                          </option>
+                        <% end %>
+
+                      </select>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
 		<% end %>
 	</div>
 </div>
+
 <script>
-	(function() {
+	$(function() {
 		$('.seed-number').change(function(event) {
-			var option = $(event.currentTarget).find("option:selected");
+      var $select = $(event.currentTarget);
+			var seedVal = $select.find("option:selected").val();
+			var athleteId = $select.find("option:selected").data('athlete-id');
+
+      // this needs to change.
 	    $.ajax({
 	    	url: '/seeds/' + option.data('id'),
 				data: { seeded: Number(option.val()) - 1 },
 				type: "PATCH"
 	    });
-		})
-	})();
+		});
+	});
 </script>

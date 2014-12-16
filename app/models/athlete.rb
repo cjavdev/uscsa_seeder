@@ -15,24 +15,23 @@
 #
 
 class Athlete < ActiveRecord::Base
-  
   belongs_to :team
   has_one :school, through: :team
   has_one :user
   has_many :seeds
-  
+
   validates :team, :bib_number, :first_name, :last_name, :sex, presence: true
   default_scope { order(:last_name, :first_name) }
   enum sex: [:male, :female]
-  
+
   def seeded(event_id)
     self.seed(event_id).seeded
   end
-  
+
   def seed(event_id)
     self.seeds.find_by(event_id: event_id)
   end
-  
+
   def captain?
     !!user.try(:captain)
   end

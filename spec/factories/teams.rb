@@ -12,9 +12,8 @@
 
 FactoryGirl.define do
   factory :team do
-    school nil
-sex 1
-discipline 1
+    school
+    sex 1
+    discipline 1
   end
-
 end

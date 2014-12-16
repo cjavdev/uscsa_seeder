@@ -49,4 +49,9 @@ class User < ActiveRecord::Base
       team.athletes
     end
   end
+
+  def managed_teams
+    return Team.includes(:athletes, :school) if admin
+    athlete.school.teams
+  end
 end

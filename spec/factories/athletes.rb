@@ -21,5 +21,6 @@ FactoryGirl.define do
     first_name "first"
     last_name "last"
     sex 1
+    team
   end
 end

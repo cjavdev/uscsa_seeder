@@ -7,6 +7,7 @@
 #  abbreviation :string(255)      not null
 #  created_at   :datetime
 #  updated_at   :datetime
+#  teams_count  :integer          default(0)
 #
 
 class School < ActiveRecord::Base
