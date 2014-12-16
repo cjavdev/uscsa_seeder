@@ -3,8 +3,8 @@ class SeedsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    current_user
-      .managed_teams.
+    @teams = current_user
+      .managed_teams
       .where(
         sex: Team.sexes[@event.sex],
         discipline: Team.disciplines[@event.discipline]
