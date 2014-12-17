@@ -74,7 +74,10 @@
           seeded: seedVal,
           athlete_id: athleteId
         },
-				type: "POST"
+				type: "POST",
+				error: function() {
+					debugger
+				}
 	    });
 		});
 	});

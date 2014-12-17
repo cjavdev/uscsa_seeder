@@ -32,6 +32,10 @@ class Event < ActiveRecord::Base
     rj: 'Rail Jam'
   }
   
+  def seeded_positions(school_id)
+    self.seeds.select{ |s| s.athlete.school.id == school_id }.map { |s| s.seeded }
+  end
+  
   def create_seeds
     Athlete.all.each { |athlete| Seed.create(athlete_id: athlete.id, event_id: self.id) }
   end
