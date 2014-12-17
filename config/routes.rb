@@ -18,4 +18,5 @@ Rails.application.routes.draw do
     resources :teams, only: [:index, :create]
   end
   resources :teams, only: [:show, :destroy]
+  resources :reports, only: [:index, :show]
 end
