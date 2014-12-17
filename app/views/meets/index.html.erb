@@ -1,7 +1,6 @@
 <div class="col-md-8">
   <h1>Meets</h1>
 
-
 	<ul class="list-group">
 		<% @meets.each do |meet| %>
 			<li class="list-group-item"> <%= link_to meet.name, meet %> </li>
@@ -26,11 +25,7 @@
 		          <td> <%= event.full_race_type %> </td>
 		          <td> <%= event.discipline.split("_").map(&:capitalize).join(" ") %> </td>
 		          <td> <%= event.sex.capitalize %> </td>
-							<td>
-								<%= button_to "Seed",
-									seed_url(event),
-									method: :get,
-									class: "btn btn-xs btn-warning" %>
+							<td> <%= link_to "Seed", event, class: "btn btn-xs btn-warning" %>
 							</td>
 							<% if current_user.admin || current_user.officer %>
 			          <td>
@@ -49,18 +44,18 @@
 	</ul>
 
   <% if current_user.admin %>
-  <div class="well">
-    <h3> New Meet </h3>
+    <div class="well">
+      <h3> New Meet </h3>
 
-    <form action="<%= meets_path %>" method="post">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <div class="form-group">
-        <input type="text" name="meet[name]" placeholder="Name" class="form-control">
-      </div>
-      <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-primary">
-      </div>
-    </form>
-  </div>
+      <form action="<%= meets_path %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <div class="form-group">
+          <input type="text" name="meet[name]" placeholder="Name" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
   <% end %>
 </div>

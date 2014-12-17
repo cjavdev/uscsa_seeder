@@ -1,6 +1,17 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :set_meet, except: [:destroy]
+  before_filter :set_meet, except: [:destroy, :show]
+
+  def show
+    @event = Event.find(params[:id])
+    @teams = current_user
+      .managed_teams
+      .where(
+        sex: Team.sexes[@event.sex],
+        discipline: Team.disciplines[@event.discipline]
+      )
+    render :show
+  end
 
   def create
     @event = @meet.events.new(event_params)
