@@ -1,23 +1,22 @@
 class SeedsController < ApplicationController
   before_filter :authenticate_user!
 
-  # def show
-  #   @event = Event.find(params[:id])
-  #   @teams = current_user
-  #     .managed_teams
-  #     .where(
-  #       sex: Team.sexes[@event.sex],
-  #       discipline: Team.disciplines[@event.discipline]
-  #     )
-  #
-  #   render :show
-  # end
+  def create
+    @seed = Seed.where(
+      event_id: params[:event_id],
+      athlete_id: params[:athlete_id]
+    ).first_or_initialize
 
-  def update
-    seed = Seed.find(params[:id])
-    seed.seeded = params[:seeded]
-    seed.save
-    render nothing: true
+    if @seed.update(seed_params)
+      render json: @seed
+    else
+      render json: @seed.errors.full_messages, status: 422
+    end
   end
 
+  private
+
+  def seed_params
+    params.permit(:athlete_id, :seeded, :event_id)
+  end
 end

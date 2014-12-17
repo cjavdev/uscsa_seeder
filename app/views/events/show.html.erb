@@ -26,6 +26,7 @@
             <% @teams.select { |t| t.school_id == school.id }.each do |team| %>
               <% athlete_count = team.athletes.count %>
               <% team.athletes.each_with_index do |athlete, i| %>
+                <% seeded = athlete.seeded(@event.id) %>
                 <tr>
                   <td><%= link_to athlete.name, athlete_path(athlete) %></td>
                   <td><%= (athlete.eligible) ? 'Eligible' : 'Not Eligible' %></td>
@@ -34,15 +35,18 @@
                   <td>
                     <div class="form-group">
                       <select name="athlete[seed_num]" class='seed-number'>
-                        <option data-athlete-id='<%= athlete.id %>' selected>
+                        <option
+                          <%= 'selected' if seeded == -1 %>
+                          data-athlete-id='<%= athlete.id %>'>
                           Not Racing
                         </option>
                         <% athlete_count.times do |x| %>
-                          <option data-athlete-id='<%= athlete.id %>'>
+                          <option
+                            <%= 'selected' if seeded == x %>
+                            data-athlete-id='<%= athlete.id %>'>
                             <%= x + 1 %>
                           </option>
                         <% end %>
-
                       </select>
                     </div>
                   </td>
@@ -62,11 +66,13 @@
 			var seedVal = $select.find("option:selected").val();
 			var athleteId = $select.find("option:selected").data('athlete-id');
 
-      // this needs to change.
 	    $.ajax({
-	    	url: '/seeds/' + option.data('id'),
-				data: { seeded: Number(option.val()) - 1 },
-				type: "PATCH"
+        url: '<%= event_seeds_path(@event) %>',
+        data: {
+          seeded: seedVal - 1,
+          athlete_id: athleteId
+        },
+				type: "POST"
 	    });
 		});
 	});

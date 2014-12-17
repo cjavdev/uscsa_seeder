@@ -19,13 +19,14 @@ class Athlete < ActiveRecord::Base
   has_one :school, through: :team
   has_one :user
   has_many :seeds
+  has_many :seed_events, through: :seeds, source: :event
 
   validates :team, :bib_number, :first_name, :last_name, :sex, presence: true
   default_scope { order(:last_name, :first_name) }
   enum sex: [:male, :female]
 
   def seeded(event_id)
-    self.seed(event_id).seeded
+    self.seed(event_id).try(:seeded) || -1
   end
 
   def seed(event_id)
