@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :schools, except: [:new, :edit] do
-    resources :teams, only: [:show, :index, :create]
+    resources :teams, only: [:index, :create]
   end
+  resources :teams, only: [:show, :destroy]
 end

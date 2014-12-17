@@ -36,12 +36,14 @@
                     <div class="form-group">
                       <select name="athlete[seed_num]" class='seed-number'>
                         <option
+                          value="-1"
                           <%= 'selected' if seeded == -1 %>
                           data-athlete-id='<%= athlete.id %>'>
                           Not Racing
                         </option>
                         <% athlete_count.times do |x| %>
                           <option
+                            value="<%= x %>"
                             <%= 'selected' if seeded == x %>
                             data-athlete-id='<%= athlete.id %>'>
                             <%= x + 1 %>
@@ -69,7 +71,7 @@
 	    $.ajax({
         url: '<%= event_seeds_path(@event) %>',
         data: {
-          seeded: seedVal - 1,
+          seeded: seedVal,
           athlete_id: athleteId
         },
 				type: "POST"

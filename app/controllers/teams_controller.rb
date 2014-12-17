@@ -20,6 +20,12 @@ class TeamsController < ApplicationController
     redirect_to @school
   end
 
+  def destroy
+    @team = Team.find(params[:id])
+    @team.destroy
+    redirect_to :back
+  end
+
   private
 
   def team_params

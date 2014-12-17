@@ -29,7 +29,7 @@ class AthletesController < ApplicationController
     unless @athlete.update(athlete_params)
       flash.now[:errors] = @athlete.errors.full_messages
     end
-    render nothing: true
+    redirect_to @athlete
   end
 
   private

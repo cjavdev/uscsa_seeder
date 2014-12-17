@@ -7,6 +7,8 @@ class SeedsController < ApplicationController
       athlete_id: params[:athlete_id]
     ).first_or_initialize
 
+    maybe_destroy!
+
     if @seed.update(seed_params)
       render json: @seed
     else
@@ -15,6 +17,14 @@ class SeedsController < ApplicationController
   end
 
   private
+
+  def maybe_destroy!
+    if params[:seeded] == -1
+      @seed.destroy
+      render json: @seed
+      return
+    end
+  end
 
   def seed_params
     params.permit(:athlete_id, :seeded, :event_id)
