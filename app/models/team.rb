@@ -12,7 +12,7 @@
 
 class Team < ActiveRecord::Base
   
-  belongs_to :school
+  belongs_to :school, counter_cache: true
   has_many :athletes
   has_many :users, through: :athletes
   

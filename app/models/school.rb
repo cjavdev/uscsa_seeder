@@ -13,7 +13,7 @@
 class School < ActiveRecord::Base
   validates :name, :abbreviation, presence: true
 
-  has_many :teams, counter_cache: true
+  has_many :teams
   has_many :athletes, through: :teams
 
   def captains

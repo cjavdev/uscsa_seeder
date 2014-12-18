@@ -21,7 +21,7 @@ class Seed < ActiveRecord::Base
   validate :valid_seed_num?
   
   def valid_seed_num?
-    errors.add(:seeded, "Already a racer in that position") if self.event.seeded_positions(self.athlete.school.id).include?(self.seeded)
+    errors.add(:seeded, "Already a racer in that position") if ~self.seeded && self.event.seeded_positions(self.athlete.school.id).include?(self.seeded)
   end
 
 end
