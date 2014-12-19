@@ -8,27 +8,23 @@ class Report
     when 'complete_roster_alpha'
       Athlete.order(:last_name)
     when 'complete_roster_discipline'
-      Struct.new(:name) do
-        def to_csv(options = {})
-          athlete_relation = Athlete
-            .unscoped
-            .eager_load(:team)
-            .select('athletes.*, teams.discipline')
-            .order('teams.discipline, athletes.last_name')
-
-          athlete_columns = Athlete.columns.map(&:name)
-          CSV.generate(options) do |csv|
-            csv << athlete_columns << ['discipline']
-            athlete_relation.each do |athlete|
-              row = athlete_columns.map { |col| athlete.send(col) }
-              row << athlete.team.discipline
-              csv << row
-            end
-          end
-        end
-      end.new('complete_roster_discipline')
+      Roster.new(
+        'athletes.*, teams.discipline',
+        'teams.discipline, athletes.last_name',
+        ['discipline']
+      ) do |athlete|
+        row = athlete_columns.map { |col| athlete.send(col) }
+        row << athlete.team.discipline
+      end
     when 'complete_roster_bib_number'
-      []
+      Roster.new(
+        'athletes.*, teams.discipline',
+        'bib_number',
+        ['discipline']
+      ) do |athlete|
+        row = athlete_columns.map { |col| athlete.send(col) }
+        row << athlete.team.discipline
+      end
     when 'complete_roster_uscsa_number'
       []
     when 'seeding_by_event_by_school'
@@ -38,7 +34,7 @@ class Report
     end
   end
 
-  def self.athlete_columns
+  def athlete_columns
     Athlete.columns.map(&:name)
   end
 end
