@@ -11,17 +11,13 @@
 #
 
 class Team < ActiveRecord::Base
-<<<<<<< HEAD
-  belongs_to :school
-=======
-  
+
   belongs_to :school, counter_cache: true
->>>>>>> master
+
   has_many :athletes
   has_many :users, through: :athletes
 
   validates :school, :discipline, :sex, presence: true
-  after_create :update_school_teams_count
 
   enum sex: [:male, :female]
   enum discipline: [:free_style_ski, :alpine_ski, :snowboard]
@@ -31,11 +27,6 @@ class Team < ActiveRecord::Base
     alpine_ski: 'Alpine Ski',
     snowboard: 'Snowboard'
   }
-
-  def update_school_teams_count
-    self.school.teams_count += 1;
-    self.school.save
-  end
 
   def self.full_disciplines
     disciplines.keys.map { |d| FULL_DISCIPLINES[d.to_sym] }
