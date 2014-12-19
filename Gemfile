@@ -18,6 +18,7 @@ group :development, :test do
   gem 'letter_opener'
   gem 'lol_dba'
   gem 'bullet'
+  gem 'pry-rails'
 end
 
 group :test do

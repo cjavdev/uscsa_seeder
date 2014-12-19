@@ -1,9 +1,12 @@
-<%= link_to "List of athletes by school, sorted alphabetically (last name)", report_path('athletes_by_school_alpha') %>
-<%= link_to "List of athletes by school, sorted by discipline, then alphabetically", report_path('athletes_by_school_discipline') %>
-<%= link_to "Complete roster, sorted alphabetically", report_path('complete_roster_alpha') %>
-<%= link_to "Complete roster, sorted by discipline, then alpha", report_path('complete_roster_discipline') %>
-<%= link_to "Complete roster of athletes by Bib number", report_path('complete_roster_bib_number') %>
-<%= link_to "Complete roster of athletes by USCSA ID #", report_path('complete_roster_uscsa_number') %>
-<%= link_to "Seeding Report by race, by school", report_path('seeding_by_event_by_school') %>
-<%= link_to "Seeding", report_path('seeding') %>
-<%= link_to "Calendar of Meets by date and start time.", report_path('meets_by_date_and_start_time') %>
+<div class="col-md-8 col-xs-8">
+  <h1> Reports </h1>
+  <%= link_to "List of athletes by school, sorted alphabetically (last name)", report_path('athletes_by_school_alpha') %><br>
+  <%= link_to "List of athletes by school, sorted by discipline, then alphabetically", report_path('athletes_by_school_discipline') %><br>
+  <%= link_to "Complete roster, sorted alphabetically", report_path('complete_roster_alpha') %><br>
+  <%= link_to "Complete roster, sorted by discipline, then alpha", report_path('complete_roster_discipline') %><br>
+  <%= link_to "Complete roster of athletes by Bib number", report_path('complete_roster_bib_number') %><br>
+  <%= link_to "Complete roster of athletes by USCSA ID #", report_path('complete_roster_uscsa_number') %><br>
+  <%= link_to "Seeding Report by race, by school", report_path('seeding_by_event_by_school') %><br>
+  <%= link_to "Seeding", report_path('seeding') %><br>
+  <%= link_to "Calendar of Meets by date and start time", report_path('meets_by_date_and_start_time') %><br>
+</div>

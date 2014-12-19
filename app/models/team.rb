@@ -11,11 +11,10 @@
 #
 
 class Team < ActiveRecord::Base
-  
   belongs_to :school
   has_many :athletes
   has_many :users, through: :athletes
-  
+
   validates :school, :discipline, :sex, presence: true
   after_create :update_school_teams_count
 
@@ -27,7 +26,7 @@ class Team < ActiveRecord::Base
     alpine_ski: 'Alpine Ski',
     snowboard: 'Snowboard'
   }
-  
+
   def update_school_teams_count
     self.school.teams_count += 1;
     self.school.save
