@@ -13,11 +13,11 @@
 #
 
 class Event < ActiveRecord::Base
-  belongs_to :meet
+  belongs_to :meet, counter_cache: true
   has_many :seeds, dependent: :destroy
   
   validates :meet, :start_at, :sex, :discipline, presence: true
-  after_create :increment_events_count, :create_seeds
+  # after_create :create_seeds
 
   enum sex: [:male, :female]
   enum discipline: [:free_style_ski, :alpine_ski, :snowboard]
@@ -32,9 +32,13 @@ class Event < ActiveRecord::Base
     rj: 'Rail Jam'
   }
   
-  def create_seeds
-    Athlete.all.each { |athlete| Seed.create(athlete_id: athlete.id, event_id: self.id) }
+  def seeded_positions(school_id)
+    self.seeds.select{ |s| s.athlete.school.id == school_id }.map { |s| s.seeded }
   end
+  
+  # def create_seeds
+  #   Athlete.all.each { |athlete| Seed.create(athlete_id: athlete.id, event_id: self.id) }
+  # end
 
   def self.full_race_types
     race_types.keys.map { |t| FULL_RACE_TYPES[t.to_sym] }
@@ -48,8 +52,4 @@ class Event < ActiveRecord::Base
     (start_at - 1.day).to_date.to_time + 17.hours
   end
   
-  def increment_events_count
-    self.meet.events_count += 1;
-    self.meet.save!
-  end
 end

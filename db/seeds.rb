@@ -68,14 +68,14 @@ puts "Building athletes..."
   )
   
   a_team_2.athletes.create!(
-    bib_number: x,
+    bib_number: x + 6,
     sex: 1,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     uscsa_number: 100 + x,
   )
   a_team_3.athletes.create!(
-    bib_number: x,
+    bib_number: x + 12,
     sex: 0,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -83,7 +83,7 @@ puts "Building athletes..."
   )
   
   a_team_4.athletes.create!(
-    bib_number: x,
+    bib_number: x + 18,
     sex: 1,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -91,7 +91,7 @@ puts "Building athletes..."
   )
   
   b_team_1.athletes.create!(
-    bib_number: x,
+    bib_number: x + 24,
     sex: 0,
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,

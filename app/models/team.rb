@@ -11,7 +11,12 @@
 #
 
 class Team < ActiveRecord::Base
+<<<<<<< HEAD
   belongs_to :school
+=======
+  
+  belongs_to :school, counter_cache: true
+>>>>>>> master
   has_many :athletes
   has_many :users, through: :athletes
 

@@ -34,7 +34,7 @@
                   <td><%= athlete.uscsa_number %></td>
                   <td>
                     <div class="form-group">
-                      <select name="athlete[seed_num]" class='seed-number'>
+                      <select name="athlete[seed_num]" class='seed-number' data-seeded='<%= seeded %>'>
                         <option
                           value="-1"
                           <%= 'selected' if seeded == -1 %>
@@ -74,7 +74,14 @@
           seeded: seedVal,
           athlete_id: athleteId
         },
-				type: "POST"
+				type: "POST",
+				success: function() {
+					$select.data('seeded', seedVal);
+				},
+				error: function() {
+					$select.find("option:selected").attr("selected", "");
+					$select.find("option[value="+ $select.data('seeded') +"]").attr("selected", "selected");
+				}
 	    });
 		});
 	});
