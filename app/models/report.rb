@@ -2,7 +2,14 @@ class Report
   def self.find(name)
     case name
     when 'athletes_by_school_alpha'
-      []
+      Roster.new(
+        'athletes.*, schools.name',
+        'school.name',
+        ["name"]
+      ) do |athlete|
+        row = athlete_columns.map { |col| athlete.send(col) }
+        row << athlete.school.name
+      end
     when 'athletes_by_school_discipline'
       []
     when 'complete_roster_alpha'
@@ -34,7 +41,7 @@ class Report
     end
   end
 
-  def athlete_columns
+  def self.athlete_columns
     Athlete.columns.map(&:name)
   end
 end
