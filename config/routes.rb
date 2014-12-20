@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   end
   resources :teams, only: [:show, :destroy]
   resources :reports, only: [:index, :show]
+  resources :officers, only: [:index]
 end
