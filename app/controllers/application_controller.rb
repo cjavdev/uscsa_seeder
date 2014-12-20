@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:invite).concat [:athlete_id, :officer]
+    if user_signed_in? && current_user.admin?
+      devise_parameter_sanitizer.for(:invite).concat [:athlete_id, :officer]
+    else
+      devise_parameter_sanitizer.for(:invite).concat [:athlete_id]
+    end
   end
 end

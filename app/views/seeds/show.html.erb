@@ -61,7 +61,6 @@
 			var seedVal = $select.find("option:selected").val();
 			var athleteId = $select.find("option:selected").data('athlete-id');
 
-      // this needs to change.
 	    $.ajax({
 	    	url: '/seeds/' + option.data('id'),
 				data: { seeded: Number(option.val()) - 1 },

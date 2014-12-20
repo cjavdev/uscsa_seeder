@@ -41,7 +41,7 @@
 </div>
 
 <script>
-	(function() {
+	$(function() {
 		var newAthlete = <%= new_athlete %>;
 		if(newAthlete){
 			$("#captain-checkbox").on("click", function(event) {
@@ -51,5 +51,5 @@
 				}
 			});
 		}
-	})();
+	});
 </script>
