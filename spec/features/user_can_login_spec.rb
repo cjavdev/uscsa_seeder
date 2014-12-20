@@ -9,6 +9,6 @@ RSpec.feature 'User can sign in' do
     fill_in 'Password', with: 'password'
     click_button 'Log in'
 
-    expect(page).to have_content("Welcome, #{ user.email }")
+    expect(page).to have_content("#{ user.email }")
   end
 end

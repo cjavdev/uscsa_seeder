@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AthletesController, :type => :controller do
+RSpec.describe EventSeedingReportsController, :type => :controller do
 
   describe "GET index" do
     it "returns http success" do

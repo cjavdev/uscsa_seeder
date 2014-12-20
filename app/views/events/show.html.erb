@@ -9,6 +9,10 @@
 
 	<%= link_to "All Meets", meets_path %>
 
+  <%= button_to "Generate Lineup", 
+    event_seeding_reports_path(event_id: @event.id), 
+    method: :post, 
+    class: 'btn btn-primary' %>
 	<div class='well'>
     <% @teams.map { |t| t.school }.uniq.each do |school| %>
       <h3> <%= school.name %> </h3>

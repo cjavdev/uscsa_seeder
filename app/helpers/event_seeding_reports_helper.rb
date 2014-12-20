@@ -1,0 +1,2 @@
+module EventSeedingReportsHelper
+end
