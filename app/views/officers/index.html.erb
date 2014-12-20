@@ -1,5 +1,28 @@
 <div class="col-md-8 col-xs-8">
-  <% @officers.each do |officer| %>
-    <%= officer.email %>
-  <% end %>
+	<h1> Officers </h1>
+  <table class='table table-hover'>
+		<thead>
+			<tr>
+				<th> Officer </th>
+			</tr>
+		</thead>
+		<tbody>
+		  <% @officers.each do |officer| %>
+				<tr>
+					<td>
+						<%= officer.email %>
+					</td>
+					<% if current_user.admin || current_user.officer %>
+	          <td>
+	            <%= button_to "Delete",
+	              officer_path(officer),
+	              method: :delete,
+	              class: "btn btn-xs btn-danger",
+	              data: { confirm: "Are you sure you want to delete this officer?" } %>
+	          </td>
+					<% end %>
+				</tr>
+		  <% end %>
+		</tbody>
+	</table>
 </div>

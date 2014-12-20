@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :athletes, only: [:index, :show, :create, :update]
   resources :captains, only: [:index]
-  resources :officers
+  resources :officers, only: [:index, :destroy]
 
   resources :meets, only: [:index, :show, :create, :destroy] do
     resources :events, only: [:create]
@@ -19,5 +19,4 @@ Rails.application.routes.draw do
   end
   resources :teams, only: [:show, :destroy]
   resources :reports, only: [:index, :show]
-  resources :officers, only: [:index]
 end

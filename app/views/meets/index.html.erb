@@ -25,8 +25,7 @@
 		          <td> <%= event.full_race_type %> </td>
 		          <td> <%= event.discipline.split("_").map(&:capitalize).join(" ") %> </td>
 		          <td> <%= event.sex.capitalize %> </td>
-							<td> <%= link_to "Seed", event, class: "btn btn-xs btn-warning" %>
-							</td>
+							<td> <%= link_to "Seed", event, class: "btn btn-xs btn-warning" %> </td>
 							<% if current_user.admin || current_user.officer %>
 			          <td>
 			            <%= button_to "Delete",
