@@ -35,7 +35,7 @@ class AthletesController < ApplicationController
   private
 
   def set_schools
-    if current_user.admin
+    if current_user.officer?
       @schools = School.includes(teams: :athletes)
     else
       @schools = [current_user.team.school]
@@ -47,7 +47,7 @@ class AthletesController < ApplicationController
   end
 
   def athlete_params
-    if current_user.admin
+    if current_user.officer
       params.require(:athlete).permit(:uscsa_number, :first_name, :last_name, :bib_number, :sex, :discipline, :team_id, :eligible)
     else
       params.require(:athlete).permit(:uscsa_number, :first_name, :last_name, :bib_number, :sex, :discipline, :eligible)

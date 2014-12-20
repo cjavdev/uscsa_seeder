@@ -1,17 +1,20 @@
 puts "Building users..."
 madison = User.where(
   email: "madison@sccsc.com",
-  admin: true
+  admin: true,
+  officer: true,
 ).first_or_create!(password: "madisonmadison")
 
 danny = User.where(
   email: "burtdaniel@gmail.com",
   admin: true,
+  captain: false
 ).first_or_create!(password: 'password')
 
 cj = User.where(
   email: "cjavilla@gmail.com",
   captain: true,
+  admin: false,
   athlete_id: 1
 ).first_or_create!(password: 'password')
 
@@ -69,7 +72,7 @@ puts "Building athletes..."
     last_name: Faker::Name.last_name,
     uscsa_number: x,
   )
-  
+
   a_team_2.athletes.create!(
     bib_number: x + 6,
     sex: 1,
@@ -84,7 +87,7 @@ puts "Building athletes..."
     last_name: Faker::Name.last_name,
     uscsa_number: 200 + x,
   )
-  
+
   a_team_4.athletes.create!(
     bib_number: x + 18,
     sex: 1,
@@ -92,7 +95,7 @@ puts "Building athletes..."
     last_name: Faker::Name.last_name,
     uscsa_number: 300 + x,
   )
-  
+
   b_team_1.athletes.create!(
     bib_number: x + 24,
     sex: 0,
@@ -100,7 +103,7 @@ puts "Building athletes..."
     last_name: Faker::Name.last_name,
     uscsa_number:400 + x,
   )
-  
+
 end
 
 january_meet = Meet.where(

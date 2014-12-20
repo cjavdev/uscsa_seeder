@@ -43,10 +43,12 @@ class User < ActiveRecord::Base
   end
 
   def athletes
-    if admin
+    if admin || officer
       Athlete.all
-    else
+    elsif captain
       team.athletes
+    else
+      Athlete.none
     end
   end
 
