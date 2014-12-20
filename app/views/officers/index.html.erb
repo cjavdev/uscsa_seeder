@@ -12,7 +12,7 @@
 					<td>
 						<%= officer.email %>
 					</td>
-					<% if current_user.admin || current_user.officer %>
+					<% if current_user.admin %>
 	          <td>
 	            <%= button_to "Delete",
 	              officer_path(officer),

@@ -1,20 +1,23 @@
 puts "Building users..."
 madison = User.where(
   email: "madison@sccsc.com",
-  admin: true,
-  officer: true
+  admin: true
 ).first_or_create!(password: "madisonmadison")
 
 danny = User.where(
   email: "burtdaniel@gmail.com",
   admin: true,
-  officer: true
 ).first_or_create!(password: 'password')
 
 cj = User.where(
   email: "cjavilla@gmail.com",
   captain: true,
   athlete_id: 1
+).first_or_create!(password: 'password')
+
+random_officer = User.where(
+  email: "random_officer@sccsc.com",
+  officer: true,
 ).first_or_create!(password: 'password')
 
 puts "Building UNR..."
