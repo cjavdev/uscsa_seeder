@@ -5,13 +5,21 @@ class Report
       Roster.new(
         'athletes.*, schools.name',
         'school.name',
-        ["name"]
+        ['name']
       ) do |athlete|
         row = athlete_columns.map { |col| athlete.send(col) }
         row << athlete.school.name
       end
     when 'athletes_by_school_discipline'
-      []
+      Roster.new(
+      'athletes.*, schools.name, schools.teams.discipline',
+      'school.name, schools.teams.discipline',
+      ['name', 'discipline']
+      ) do |athlete|
+        row = athlete_columns.map { |col| athlete.send(col) }
+        row << athlete.school.name
+        row << athlete.team.discipline
+      end
     when 'complete_roster_alpha'
       Athlete.order(:last_name)
     when 'complete_roster_discipline'
@@ -33,7 +41,7 @@ class Report
         row << athlete.team.discipline
       end
     when 'complete_roster_uscsa_number'
-      []
+      Athelte.order(:usca_number)
     when 'seeding_by_event_by_school'
       []
     when 'seeding'
