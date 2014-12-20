@@ -5,20 +5,28 @@
       <%= current_user.email %>
     </span>
     <a href="<%= meets_path %>" class="list-group-item">
-      <i class="fa fa-calendar"></i> Meets <span class="badge"><%= Meet.count %></span>
+      <i class="fa fa-calendar"></i> Meets 
+      <span class="badge"><%= Meet.count %></span>
     </a>
     <a href="<%= athletes_path %>" class="list-group-item">
-      <i class="fa fa-users"></i> Athletes <span class="badge"><%= current_user.athletes.count %></span>
+      <i class="fa fa-users"></i> Athletes 
+      <span class="badge"><%= current_user.athletes.count %></span>
     </a>
-    <a href="<%= captains_path %>" class="list-group-item">
-      <i class="fa fa-users"></i> Captains <span class="badge"><%= User.captains.count %></span>
-    </a>
+    <% if current_user.can_manage_league? %>
+      <a href="<%= captains_path %>" class="list-group-item">
+        <i class="fa fa-users"></i> Captains 
+        <span class="badge"><%= User.captains.count %></span>
+      </a>
+    <% end %>
     <a href="<%= schools_path %>" class="list-group-item">
-      <i class="fa fa-university"></i> Schools <span class="badge"><%= School.count %></span>
+      <i class="fa fa-university"></i> Schools 
+      <span class="badge"><%= School.count %></span>
     </a>
-    <a href="<%= officers_path %>" class="list-group-item">
-      <i class="fa fa-legal"></i> Officers
-    </a>
+    <% if current_user.admin %>
+      <a href="<%= officers_path %>" class="list-group-item">
+        <i class="fa fa-legal"></i> Officers
+      </a>
+    <% end %>
     <a href="<%= reports_path %>" class="list-group-item">
       <i class="fa fa-folder-open-o"></i> Reports
     </a>
@@ -29,7 +37,8 @@
       <i class="fa fa-sign-out"></i> Sign Out
     </a>
     <a href="<%= captains_path %>" class="list-group-item list-group-item-default active">
-      <i class="fa fa-users"></i> Seeding <span class="badge"><%= User.captains.count %></span>
+      <i class="fa fa-users"></i> Seeding 
+      <span class="badge"><%= User.captains.count %></span>
     </a>
   </div>
 </div>

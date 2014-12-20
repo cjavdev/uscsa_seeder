@@ -2,7 +2,6 @@ class SeedsController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    
     @seed = Seed.where(
       event_id: params[:event_id],
       athlete_id: params[:athlete_id]

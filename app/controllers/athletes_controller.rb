@@ -35,11 +35,7 @@ class AthletesController < ApplicationController
   private
 
   def set_schools
-    if current_user.admin
-      @schools = School.includes(teams: :athletes)
-    else
-      @schools = [current_user.team.school]
-    end
+    @schools = current_user.schools
   end
 
   def set_athletes
@@ -47,10 +43,31 @@ class AthletesController < ApplicationController
   end
 
   def athlete_params
-    if current_user.admin
-      params.require(:athlete).permit(:uscsa_number, :first_name, :last_name, :bib_number, :sex, :discipline, :team_id, :eligible)
+    if current_user.can_manage_league?
+      params
+        .require(:athlete)
+        .permit(
+          :uscsa_number,
+          :first_name,
+          :last_name,
+          :bib_number,
+          :sex,
+          :discipline,
+          :team_id,
+          :eligible
+        )
     else
-      params.require(:athlete).permit(:uscsa_number, :first_name, :last_name, :bib_number, :sex, :discipline, :eligible)
+      params
+        .require(:athlete)
+        .permit(
+          :uscsa_number,
+          :first_name,
+          :last_name,
+          :bib_number,
+          :sex,
+          :discipline,
+          :eligible
+        )
     end
   end
 end
