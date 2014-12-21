@@ -4,7 +4,7 @@ class Report
     when 'athletes_by_school_alpha'
       Roster.new(
         'athletes.*, schools.name',
-        'school.name',
+        'schools.name',
         ['name']
       ) do |athlete|
         row = athlete_columns.map { |col| athlete.send(col) }
@@ -12,8 +12,8 @@ class Report
       end
     when 'athletes_by_school_discipline'
       Roster.new(
-      'athletes.*, schools.name, schools.teams.discipline',
-      'school.name, schools.teams.discipline',
+      'athletes.*, schools.name, teams.discipline',
+      'schools.name, teams.discipline',
       ['name', 'discipline']
       ) do |athlete|
         row = athlete_columns.map { |col| athlete.send(col) }
