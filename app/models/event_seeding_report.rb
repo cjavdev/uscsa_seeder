@@ -20,11 +20,19 @@ class EventSeedingReport < ActiveRecord::Base
   end
 
   def seed_athlete_ids
-    event.seeds.pluck(:athlete_id, :seeded)
+    event.athlete_ids_and_seeded
   end
 
   def regenerate_seeds!
     self.report_data = Seeder.new(seed_athlete_ids).generate_seeds.to_json
     save!
+  end
+
+  def heats
+    report_data.map do |heat|
+      heat.map do |(athlete_id, _)|
+        Athlete.find(athlete_id)
+      end
+    end
   end
 end

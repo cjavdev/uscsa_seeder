@@ -1,5 +1,11 @@
-<h1>Lineup</h1>
+<div class="col-md-8 col-xs-8">
+  <h1>Lineup</h1>
 
-<% @report.heats.each_with_index do |heat, i| %>
-<em> Heat <%= i %>  </em>
-<% end %>
+  <% @report.heats.each_with_index do |heat, i| %>
+    <strong> Heat <%= i %> </strong>
+
+    <% heat.each do |athlete| %>
+      <%= link_to athlete.name, athlete %></br>
+    <% end %>
+  <% end %>
+</div>

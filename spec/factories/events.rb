@@ -15,5 +15,6 @@
 FactoryGirl.define do
   factory :event do
     meet
+    start_at Date.new(2000, 01, 01).to_time
   end
 end

@@ -5,6 +5,7 @@ class EventSeedingReportsController < ApplicationController
   end
 
   def show
+    @report = EventSeedingReport.find(params[:id])
   end
 
   def create

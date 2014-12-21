@@ -12,7 +12,6 @@
 FactoryGirl.define do
   factory :event_seeding_report do
     event_id 1
-report_data ""
+    report_data ""
   end
-
 end

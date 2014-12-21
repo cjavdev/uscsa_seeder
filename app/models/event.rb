@@ -15,14 +15,13 @@
 class Event < ActiveRecord::Base
   belongs_to :meet, counter_cache: true
   has_many :seeds, dependent: :destroy
-  
+
   validates :meet, :start_at, :sex, :discipline, presence: true
-  # after_create :create_seeds
 
   enum sex: [:male, :female]
   enum discipline: [:free_style_ski, :alpine_ski, :snowboard]
   enum race_type: [:gs, :s, :bx, :sx, :ss, :rj]
-  
+
   FULL_RACE_TYPES = {
     gs: 'Giant Slalom',
     s: 'Slalom',
@@ -31,14 +30,14 @@ class Event < ActiveRecord::Base
     ss: 'Slopestyle',
     rj: 'Rail Jam'
   }
-  
+
+  def athlete_ids_and_seeded
+    seeds.pluck(:athlete_id, :seeded)
+  end
+
   def seeded_positions(school_id)
     self.seeds.select{ |s| s.athlete.school.id == school_id }.map { |s| s.seeded }
   end
-  
-  # def create_seeds
-  #   Athlete.all.each { |athlete| Seed.create(athlete_id: athlete.id, event_id: self.id) }
-  # end
 
   def self.full_race_types
     race_types.keys.map { |t| FULL_RACE_TYPES[t.to_sym] }
@@ -51,5 +50,4 @@ class Event < ActiveRecord::Base
   def seeding_closes_at
     (start_at - 1.day).to_date.to_time + 17.hours
   end
-  
 end
