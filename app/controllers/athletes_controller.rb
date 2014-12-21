@@ -17,7 +17,7 @@ class AthletesController < ApplicationController
   def create
     @athlete = @athletes.new(athlete_params)
     if @athlete.save
-      redirect_to @athlete
+      redirect_to athletes_path
     else
       flash.now[:errors] = @athlete.errors.full_messages
       render :index

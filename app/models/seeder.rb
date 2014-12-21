@@ -17,9 +17,11 @@ class Seeder
   end
 
   def combine_groups
-    @athletes = groups.inject([]) do |acum, (k, v)|
-      acum + v
-    end
+    @athletes = groups
+      .sort_by { |k, v| k }
+      .inject([]) do |acum, (k, v)|
+        acum + v
+      end
     @athletes
   end
 
@@ -31,11 +33,6 @@ class Seeder
   end
 
   def generate_seeds
-    changeable = @athletes.dup
-    heats = []
-    until changeable.length == 0
-      heats << changeable.shift(3) + changeable.pop(3)
-    end
-    heats
+    raise NotImplementedError
   end
 end
