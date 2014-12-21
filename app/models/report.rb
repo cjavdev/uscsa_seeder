@@ -41,7 +41,7 @@ class Report
         row << athlete.team.discipline
       end
     when 'complete_roster_uscsa_number'
-      Athelte.order(:usca_number)
+      Athlete.order(:usca_number)
     when 'seeding_by_event_by_school'
       []
     when 'seeding'
