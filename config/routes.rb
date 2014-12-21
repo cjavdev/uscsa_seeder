@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'event_seeding_reports/index'
-
-  get 'event_seeding_reports/show'
-
   root to: 'meets#index'
   devise_for :users, controllers: { invitations: 'captain_invitations' }
 
@@ -23,5 +19,5 @@ Rails.application.routes.draw do
   end
   resources :teams, only: [:show, :destroy]
   resources :reports, only: [:index, :show]
-  resources :event_seeding_reports, only: [:index, :show, :create, :update]
+  resources :event_seeding_reports, only: [:show, :create, :update]
 end

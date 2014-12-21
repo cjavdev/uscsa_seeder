@@ -30,8 +30,8 @@ class EventSeedingReport < ActiveRecord::Base
 
   def heats
     report_data.map do |heat|
-      heat.map do |(athlete_id, _)|
-        Athlete.find(athlete_id)
+      heat.map do |(athlete_id, seeded)|
+        HeatAthlete.new(Athlete.find(athlete_id), seeded)
       end
     end
   end

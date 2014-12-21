@@ -1,9 +1,6 @@
 class EventSeedingReportsController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-  end
-
   def show
     @report = EventSeedingReport.find(params[:id])
   end

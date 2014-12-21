@@ -31,6 +31,14 @@ class Event < ActiveRecord::Base
     rj: 'Rail Jam'
   }
 
+  def plural_gender
+    { 'male' => "Men's", 'female' => "Women's" }[sex]
+  end
+
+  def name
+    "#{ plural_gender } #{ full_race_type }"
+  end
+
   def athlete_ids_and_seeded
     seeds.pluck(:athlete_id, :seeded)
   end
