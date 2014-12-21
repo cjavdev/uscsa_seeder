@@ -6,8 +6,7 @@ class Roster
     @athlete_blk = athlete_blk
     @athletes_relation = Athlete
       .unscoped
-      .eager_load(:team)
-      .eager_load(:school)
+      .eager_load(team: :school)
       .select(select)
       .order(order)
   end
