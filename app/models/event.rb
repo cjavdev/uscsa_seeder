@@ -41,6 +41,16 @@ class Event < ActiveRecord::Base
     'rj' => BestLastSeeder
   }
 
+  FULL_DISCIPLINES = {
+    free_style_ski: 'Free Style Skiing',
+    alpine_ski: 'Alpine Skiing',
+    snowboard: 'Snowboarding'
+  }
+
+  def full_discipline
+    FULL_DISCIPLINES[discipline.to_sym]
+  end
+
   def seeded?
     !!event_seeding_report
   end

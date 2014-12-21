@@ -1,5 +1,5 @@
 <div class="col-md-8 col-xs-8">
-  <h1><%= @report.event.name %> - Lineup</h1>
+  <h1><%= @report.event.name %> <small>Lineup</small></h1>
 
   <%= button_to "Regenerate!", @report, method: :patch, class: 'btn btn-primary' %>
 
@@ -28,7 +28,7 @@
           <td> <%= link_to athlete.first_name, athlete_path(athlete.id) %> </td>
           <td> <%= link_to athlete.last_name, athlete_path(athlete.id) %> </td>
           <td> <%= athlete.school_name %> </td>
-          <td> <%= athlete.seeded %> </td>
+          <td> <%= athlete.seeded + 1 %> </td>
         </tr>
       <% end %>
       </tbody>
