@@ -16,16 +16,7 @@ class EventSeedingReport < ActiveRecord::Base
   before_validation :compile_seed_data, on: :create
 
   def seeder_class
-    @seeder_class ||= begin
-      case event.race_type
-      when 'bx'
-        HighVsLowSeeder
-      when 'gs', 'sl'
-        SeedOrderSeeder
-      when 'slp', 'hp', 'qp', 'jam'
-        BestLastSeeder
-      end
-    end
+    event.seeder_class
   end
 
   def compile_seed_data

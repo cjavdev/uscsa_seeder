@@ -31,6 +31,19 @@ class Event < ActiveRecord::Base
     rj: 'Rail Jam'
   }
 
+  RACE_TYPE_SEEDERS = {
+    'bx' => HighVsLowSeeder,
+    'gs' => SeedOrderSeeder,
+    's'  => SeedOrderSeeder,
+    'ss' => BestLastSeeder,
+    'hp' => BestLastSeeder,
+    'rj' => BestLastSeeder
+  }
+
+  def seeder_class
+    RACE_TYPE_SEEDERS[race_type]
+  end
+
   def plural_gender
     { 'male' => "Men's", 'female' => "Women's" }[sex]
   end
