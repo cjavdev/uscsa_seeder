@@ -13,7 +13,7 @@ require 'rails_helper'
 
 RSpec.describe EventSeedingReport, :type => :model do
   it '#report_data returns array of arrays based on raw data' do
-    event = FactoryGirl.create(:event)
+    event = FactoryGirl.create(:event, race_type: :bx)
     allow(event).to receive(:athlete_ids_and_seeded).and_return([
       [1, 1],
       [5, 2],

@@ -1,4 +1,4 @@
-describe Seeder do
+describe HighVsLowSeeder do
   context 'with one team' do
     let(:athletes) do
       [
@@ -12,8 +12,9 @@ describe Seeder do
       ]
     end
 
+    subject(:seeder) { HighVsLowSeeder.new(athletes) }
+
     it 'groups athletes, best with worst seed' do
-      seeder = Seeder.new(athletes)
       expect(seeder.generate_seeds).to eq([
         athletes.shift(3) + athletes.pop(3),
         [[:a, 4]]
@@ -21,7 +22,6 @@ describe Seeder do
     end
 
     it 'generates groups that are at most 6 athletes long' do
-      seeder = Seeder.new(athletes)
       expect(seeder.generate_seeds[0].length).to eq(6)
       expect(seeder.generate_seeds.length).to eq(2)
     end
@@ -36,8 +36,9 @@ describe Seeder do
       ]
     end
 
+    subject(:seeder) { HighVsLowSeeder.new(athletes) }
+
     it 'groups athletes, best with worst seed' do
-      seeder = Seeder.new(athletes)
       expect(seeder.generate_seeds.first.map(&:last))
         .to contain_exactly(1, 1, 1, 7, 6, 6)
       expect(seeder.generate_seeds[1].map(&:last))
@@ -47,7 +48,6 @@ describe Seeder do
     end
 
     it 'generates groups that are at most 6 athletes long' do
-      seeder = Seeder.new(athletes)
       expect(seeder.generate_seeds[0].length).to eq(6)
       expect(seeder.generate_seeds.length).to eq(3)
     end

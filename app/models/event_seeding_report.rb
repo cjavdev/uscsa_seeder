@@ -15,8 +15,21 @@ class EventSeedingReport < ActiveRecord::Base
 
   before_validation :compile_seed_data, on: :create
 
+  def seeder_class
+    @seeder_class ||= begin
+      case event.race_type
+      when 'bx'
+        HighVsLowSeeder
+      when 'gs', 'sl'
+        SeedOrderSeeder
+      when 'slp', 'hp', 'qp', 'jam'
+        BestLastSeeder
+      end
+    end
+  end
+
   def compile_seed_data
-    self.report_data ||= Seeder.new(seed_athlete_ids).generate_seeds.to_json
+    self.report_data ||= seeder_class.new(seed_athlete_ids).generate_seeds.to_json
   end
 
   def seed_athlete_ids
