@@ -8,11 +8,10 @@
 		<thead>
 			<tr>
 				<th>#</th>
+        <th>Name</th>
         <th>Start At</th>
         <th>Registration Closes At</th>
-        <th>Type</th>
 				<th>Discipline</th>
-        <th>Sex</th>
         <th>&nbsp;</th>
 			</tr>
 		</thead>
@@ -20,11 +19,11 @@
 		  <% @meet.events.each do |event| %>
         <tr>
           <td> <%= event.id %> </td>
+          <td> <%= link_to event.name, event %> </td>
           <td> <%= event.start_at.strftime("%B %d at %I:%M %p %Z") %> </td>
           <td> <%= event.seeding_closes_at.strftime("%B %d at %I:%M %p") %> </td>
-          <td> <%= event.full_race_type %> </td>
-          <td> <%= event.discipline.split("_").map(&:capitalize).join(" ") %> </td>
-          <td> <%= event.sex %> </td>
+          <td> <%= event.full_discipline %> </td>
+          <td><%= link_to "Seed", event, class: "btn btn-xs btn-warning" %> </td>
           <td>
             <%= button_to "Delete",
               event,
