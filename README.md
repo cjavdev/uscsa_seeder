@@ -22,15 +22,17 @@ a season of snow sport contests.
 +  Officer can import race data
 +  Officer can import athlete data
 +  ~~Captain can seed athletes to races~~
-+  Captain/Officer can only seed one racer per position
++  ~~Captain/Officer can only seed one racer per position~~
 +  When its race day
    + Captain sees read only roster
 +  Officer can pull reports that:
-   +  List of athletes by school, sorted alphabetically (last name)
-   +  List of athletes by school, sorted by discipline, then alphabetically
-   +  Complete roster (for admin purposes), sorted alphabetically
-   +  Complete roster (for admin purposes), sorted by discipline, then alpha
-   +  Complete roster of athletes by Bib number
+   +  ~~List of athletes by school, sorted alphabetically (last name)~~
+   +  ~~List of athletes by school, sorted by discipline, then
+alphabetically~~
+   +  ~~Complete roster (for admin purposes), sorted alphabetically~~
+   +  ~~Complete roster (for admin purposes), sorted by discipline, then
+alpha~~
+   +  ~~Complete roster of athletes by Bib number~~
    +  Complete roster of athletes by USCSA ID #
    +  Calendar of all of the races entered by date and start time.
    +  Seeding Report by race, by school
