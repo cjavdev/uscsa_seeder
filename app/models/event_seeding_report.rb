@@ -11,8 +11,9 @@
 
 class EventSeedingReport < ActiveRecord::Base
   validates :event, presence: true
-  belongs_to :event
+  validates :event_id, uniqueness: true
 
+  belongs_to :event
   before_validation :compile_seed_data, on: :create
 
   def seeder_class
@@ -28,7 +29,7 @@ class EventSeedingReport < ActiveRecord::Base
   end
 
   def regenerate_seeds!
-    self.report_data = Seeder.new(seed_athlete_ids).generate_seeds.to_json
+    self.report_data = seeder_class.new(seed_athlete_ids).generate_seeds.to_json
     save!
   end
 

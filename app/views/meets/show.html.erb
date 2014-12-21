@@ -48,14 +48,19 @@
         </div>
         <div class="form-group">
           <select name="event[race_type]" class="form-control">
-            <% Event.full_race_types.each_with_index do |race_type, i| %>
-              <option value="<%= i %>"><%= race_type %></option>
+            <% Event.race_types.each do |(race_type, _)| %>
+              <option value="<%= race_type %>">
+                <%= Event::FULL_RACE_TYPES[race_type.to_sym] %>
+              </option>
             <% end %>
           </select>
-        </div>        <div class="form-group">
+        </div>
+        <div class="form-group">
           <select name="event[discipline]" class="form-control">
             <% Team.disciplines.each do |discipline| %>
-            <option value="<%= discipline[0] %>"><%= discipline[0].split("_").map(&:capitalize).join(" ") %></option>
+              <option value="<%= discipline[0] %>">
+                <%= discipline[0].split("_").map(&:capitalize).join(" ") %>
+              </option>
             <% end %>
           </select>
         </div>

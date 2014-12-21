@@ -15,6 +15,7 @@
 class Event < ActiveRecord::Base
   belongs_to :meet, counter_cache: true
   has_many :seeds, dependent: :destroy
+  has_one :event_seeding_report
 
   validates :meet, :start_at, :sex, :discipline, presence: true
 
@@ -39,6 +40,10 @@ class Event < ActiveRecord::Base
     'hp' => BestLastSeeder,
     'rj' => BestLastSeeder
   }
+
+  def seeded?
+    !!event_seeding_report
+  end
 
   def seeder_class
     RACE_TYPE_SEEDERS[race_type]

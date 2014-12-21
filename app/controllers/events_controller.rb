@@ -23,7 +23,6 @@ class EventsController < ApplicationController
 
   def destroy
     @event = Event.find(params[:id])
-    meet = @event.meet
     @event.try(:destroy)
     redirect_to meets_path
   end
@@ -31,7 +30,7 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:start_at, :discipline, :sex)
+    params.require(:event).permit(:start_at, :discipline, :sex, :race_type)
   end
 
   def set_meet

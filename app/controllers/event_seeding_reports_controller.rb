@@ -11,7 +11,7 @@ class EventSeedingReportsController < ApplicationController
       redirect_to @report
     else
       flash[:errors] = @report.errors.full_messages
-      redirect_to event_seeding_reports_path
+      redirect_to @report.event
     end
   end
 
