@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
     if can_manage_league?
       School.includes(teams: :athletes)
     elsif captain
-      [current_user.team.school]
+      School.includes(teams: :athletes).where({id: self.team.school.id })
     else
       []
     end
