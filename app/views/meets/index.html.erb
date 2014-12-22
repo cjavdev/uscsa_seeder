@@ -25,7 +25,7 @@
 		          <td> <%= event.full_race_type %> </td>
 		          <td> <%= event.discipline.split("_").map(&:capitalize).join(" ") %> </td>
 		          <td> <%= event.sex.capitalize %> </td>
-							<% if current_user.can_manage_league? || event.seeding_closes_at > Date.current  %>
+							<% if current_user.can_manage_league? || event.seeding_closes_at > Time.now  %>
 								<td> <%= link_to "Seed", event, class: "btn btn-xs btn-warning" %> </td>
 							<% end %>
 							<% if current_user.can_manage_league? %>
