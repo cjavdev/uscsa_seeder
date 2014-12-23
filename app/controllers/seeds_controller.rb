@@ -9,7 +9,7 @@ class SeedsController < ApplicationController
 
     maybe_destroy!
     
-    if (current_user.can_manage_league? || self.event.seeding_closes_at < Date.current) && @seed.update(seed_params)
+    if (current_user.can_manage_league? || self.event.seeding_closes_at < Date.current || current_user.can_seed_late) && @seed.update(seed_params)
       render json: @seed
     else
       render json: @seed.errors.full_messages, status: 422
