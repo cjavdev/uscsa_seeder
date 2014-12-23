@@ -48,7 +48,7 @@
 <script>
   $(function() {
 		$(".eligibility-checkbox").on("click", function(event) {
-			var athlete = $(event.currentTarget)
+			var athlete = $(event.currentTarget);
 	    $.ajax({
 	    	url: '/athletes/' + athlete.data('id'),
 				data: { athlete: { eligible: athlete.prop('checked') } },

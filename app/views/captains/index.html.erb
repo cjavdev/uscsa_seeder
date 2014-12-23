@@ -9,7 +9,16 @@
         </h4>
         <ul class="list-group-item-text">
         <% school.captains.each do |captain| %>
-          <li><%= link_to captain.name, captain %></li>
+          <li>
+						<%= link_to captain.name, captain %> |
+						<span> Allow Late Seeding </span>
+            <input
+              type='checkbox'
+              data-id='<%= captain.id %>'
+              <% if captain.user.can_seed_late %> checked <% end %>
+							class='seeding-checkbox'>
+					</li>
+					
         <% end %>
         </ul>
 	    </li>
@@ -20,3 +29,17 @@
     <%= render 'captains/form', new_athlete: false %>
   <% end %>
 </div>
+
+<script>
+  $(function() {
+		$(".seeding-checkbox").on("click", function(event) {
+			var captain = $(event.currentTarget);
+	    $.ajax({
+	    	url: '/captains/' + captain.data('id'),
+				data: { captain: { can_seed_late: captain.prop('checked') } },
+				type: "PATCH"
+	    });
+		});
+	});
+</script>
+

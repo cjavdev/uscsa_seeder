@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { invitations: 'captain_invitations' }
 
   resources :athletes, only: [:index, :show, :create, :update]
-  resources :captains, only: [:index]
+  resources :captains, only: [:index, :update]
   resources :officers, only: [:index, :destroy]
 
   resources :meets, only: [:index, :show, :create, :destroy] do
