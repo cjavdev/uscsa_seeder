@@ -8,8 +8,8 @@ class SeedsController < ApplicationController
     ).first_or_initialize
 
     maybe_destroy!
-
-    if @seed.update(seed_params)
+    
+    if (current_user.can_manage_league? || self.event.seeding_closes_at < Date.current) && @seed.update(seed_params)
       render json: @seed
     else
       render json: @seed.errors.full_messages, status: 422

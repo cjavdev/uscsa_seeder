@@ -17,7 +17,7 @@ class Seed < ActiveRecord::Base
   validates :athlete, :event, :seeded, presence: true
   validates :athlete_id, uniqueness: { scope: :event_id }
 
-  validate :valid_seed_num?, :registration_open
+  validate :valid_seed_num?
 
   def valid_seed_num?
     if ~self.seeded &&
@@ -26,9 +26,4 @@ class Seed < ActiveRecord::Base
     end
   end
   
-  def registration_open
-    if !current_user.can_manage_league? && self.event.seeding_closes_at < Date.current
-      errors.add(:event, "Event is closed. Seeding can not be changed");
-    end
-  end
 end
