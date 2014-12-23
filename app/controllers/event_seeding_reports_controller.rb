@@ -3,6 +3,10 @@ class EventSeedingReportsController < ApplicationController
 
   def show
     @report = EventSeedingReport.find(params[:id])
+    respond_to do |format|
+      format.html { render :show }
+      format.csv { send_data @report.to_csv }
+    end
   end
 
   def create

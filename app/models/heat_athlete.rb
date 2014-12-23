@@ -1,13 +1,13 @@
-class HeatAthlete
+class HeatAthlete < SimpleDelegator
   extend Forwardable
 
   def initialize(athlete, seeded)
+    super(athlete)
     @athlete = athlete
     @seeded = seeded
   end
 
   attr_reader :athlete, :seeded
-  def_delegators :@athlete, :id, :first_name, :last_name
 
   def school_name
     @athlete.school.name

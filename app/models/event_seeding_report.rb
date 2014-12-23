@@ -40,4 +40,37 @@ class EventSeedingReport < ActiveRecord::Base
       end
     end
   end
+
+  def to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << [
+        "heat_num",
+        "athlete_num",
+        "first_name",
+        "last_name",
+        "bib_number",
+        "uscsa_number",
+        "eligible",
+        "sex",
+        "athlete_id",
+        "team_id",
+      ]
+      heats.each_with_index do |heat, heat_num|
+        heat.each_with_index do |heat_athlete, athlete_num|
+          csv << [
+            heat_num + 1,
+            athlete_num + 1,
+            heat_athlete.first_name,
+            heat_athlete.last_name,
+            heat_athlete.bib_number,
+            heat_athlete.eligible,
+            heat_athlete.sex,
+            heat_athlete.uscsa_number,
+            heat_athlete.id,
+            heat_athlete.team_id,
+          ]
+        end
+      end
+    end
+  end
 end
