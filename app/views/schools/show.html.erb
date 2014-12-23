@@ -5,12 +5,15 @@
   <ul class="nav nav-pills">
     <li> <%= link_to "All Schools", schools_path, class: "btn btn-default" %> </li>
   </ul>
-  <br>
-
-  <div class="well">
-    <h3> Update School </h3>
-    <%= render 'form', school: @school %>
-  </div>
+  
+	
+	<% if current_user.can_manage_league? %>
+		<br>
+	  <div class="well">
+	    <h3> Update School </h3>
+	    <%= render 'form', school: @school %>
+	  </div>
+	<% end %>
 
   <h3> Teams </h3>
 
