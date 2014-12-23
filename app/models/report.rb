@@ -41,11 +41,42 @@ class Report
         row << athlete.team.discipline
       end
     when 'complete_roster_uscsa_number'
-      Athlete.order(:usca_number)
+      Athlete.order(:uscsa_number)
     when 'seeding_by_event_by_school'
       []
     when 'seeding'
       []
+    when 'meets_by_date_and_start_time'
+      Struct.new(:dummy) do
+        def to_csv
+          CSV.generate({}) do |csv|
+            csv << [
+              'id',
+              'meet',
+              'event',
+              'start_at',
+              'sex',
+              'discipline',
+              'race_type',
+              'full_race_type',
+            ]
+            Meet.includes(:events).order('events.start_at').each do |meet|
+              meet.events.each do |event|
+                csv << [
+                  meet.id,
+                  meet.name,
+                  event.name,
+                  event.start_at,
+                  event.sex,
+                  event.discipline,
+                  event.race_type,
+                  event.full_race_type,
+                ]
+              end
+            end
+          end
+        end
+      end.new(:meets_by_date_and_start_time)
     end
   end
 
